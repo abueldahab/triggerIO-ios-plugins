@@ -15,7 +15,7 @@
 		[task error:@"You must enter a message"];
 		return;
 	}
-	UIAlertView *database = [[UIAlertView alloc] initWithTitle:@"Alert1"
+	UIAlertView *database = [[UIAlertView alloc] initWithTitle:@"database"
 													message:text
 												   delegate:nil
 										  cancelButtonTitle:@"OK"
