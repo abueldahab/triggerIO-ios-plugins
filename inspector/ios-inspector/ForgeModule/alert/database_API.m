@@ -7,6 +7,8 @@
 //
 
 #import "database_API.h"
+#import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
 
 @implementation database_API
 
@@ -22,6 +24,14 @@
 										  otherButtonTitles:nil];
 	[database show];
 	[task success:nil];
+}
+
++ (void)read:(ForgeTask*)task Query:(NSString *)query {
+ 
+    //Set path for db
+    NSString *dbPath = @"fetchbase.db";
+    
+    
 }
 
 @end

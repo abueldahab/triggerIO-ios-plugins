@@ -12,5 +12,7 @@
 @interface database_API : NSObject
 
 + (void)show:(ForgeTask*)task text:(NSString *)text;
++ (void)read:(ForgeTask*)task Query:(NSString *)query;
 
 @end
+
