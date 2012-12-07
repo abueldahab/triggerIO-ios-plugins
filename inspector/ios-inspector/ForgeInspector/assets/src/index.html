@@ -7,8 +7,8 @@
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<script>
-			forge.internal.addEventListener("alert.resume", function () {
-				alert("Weclome back!");
+			forge.internal.addEventListener("database.resume", function () {
+				database("Weclome back!");
 			});
 		
 			$(function () {
@@ -54,11 +54,11 @@
 							params[$(x).attr('id')] = $(x).val();
 						});
 						
-						$('#_output').prepend('<pre class="alert alert-info">Called "'+module+'.'+method+'" with "'+JSON.stringify(params, null, '')+'"</pre>');
+						$('#_output').prepend('<pre class="database database-info">Called "'+module+'.'+method+'" with "'+JSON.stringify(params, null, '')+'"</pre>');
 						forge.internal.call(module+'.'+method, params, function () {
-							$('#_output').prepend('<pre class="alert alert-success">Success for "'+module+'.'+method+'" with "'+JSON.stringify(arguments[0], null, '')+'"</pre>');
+							$('#_output').prepend('<pre class="database database-success">Success for "'+module+'.'+method+'" with "'+JSON.stringify(arguments[0], null, '')+'"</pre>');
 						}, function () {
-							$('#_output').prepend('<pre class="alert alert-error">Error for "'+module+'.'+method+'" with "'+JSON.stringify(arguments[0], null, '')+'"</pre>');
+							$('#_output').prepend('<pre class="database database-error">Error for "'+module+'.'+method+'" with "'+JSON.stringify(arguments[0], null, '')+'"</pre>');
 						})
 					});
 				}, function () {
@@ -66,15 +66,15 @@
 				});
 				forge.internal.addEventListener('*', function (event, e) {
 					if (event == 'inspector.eventTriggered') {
-						$('#_output').prepend('<pre class="alert alert-warning">Native event triggered "'+e.name+'"</pre>');
+						$('#_output').prepend('<pre class="database database-warning">Native event triggered "'+e.name+'"</pre>');
 					} else if (event == 'inspector.eventInvoked') {
 						if (e['class'] == 'ForgeEventListener') {
-							$('#_output').prepend('<pre class="alert alert-warning">Default event listener for "'+e.name+'" called</pre>');
+							$('#_output').prepend('<pre class="database database-warning">Default event listener for "'+e.name+'" called</pre>');
 						} else {
-							$('#_output').prepend('<pre class="alert alert-warning">Calling event listener "'+e.name+'" in class "'+e['class']+'"</pre>');
+							$('#_output').prepend('<pre class="database database-warning">Calling event listener "'+e.name+'" in class "'+e['class']+'"</pre>');
 						}
 					} else {
-						$('#_output').prepend('<pre class="alert alert-warning">Javascript event "'+event+'" triggered with data "'+JSON.stringify(e)+'"</pre>');
+						$('#_output').prepend('<pre class="database database-warning">Javascript event "'+event+'" triggered with data "'+JSON.stringify(e)+'"</pre>');
 					}
 				});
 			});
