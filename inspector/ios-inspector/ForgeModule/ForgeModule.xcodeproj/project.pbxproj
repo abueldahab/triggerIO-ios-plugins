@@ -16,6 +16,12 @@
 		B3FC51FF15C1523D003574D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC51FE15C1523D003574D9 /* CoreGraphics.framework */; };
 		B3FC524215C177EA003574D9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC524115C177EA003574D9 /* AssetsLibrary.framework */; };
 		B3FC524815C17B2C003574D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC524715C17B2C003574D9 /* SystemConfiguration.framework */; };
+		D8D157BA16725C170015349E /* database_API.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D157B916725C170015349E /* database_API.m */; };
+		D8D157BB16725C170015349E /* database_API.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D157B916725C170015349E /* database_API.m */; };
+		D8D157C516725E3E0015349E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D157C216725E3D0015349E /* FMDatabase.m */; };
+		D8D157C616725E3E0015349E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D157C216725E3D0015349E /* FMDatabase.m */; };
+		D8D157C716725E3E0015349E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D157C416725E3E0015349E /* FMResultSet.m */; };
+		D8D157C816725E3E0015349E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D157C416725E3E0015349E /* FMResultSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +38,12 @@
 		B3FC51FE15C1523D003574D9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B3FC524115C177EA003574D9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B3FC524715C17B2C003574D9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D8D157B816725C170015349E /* database_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = database_API.h; sourceTree = "<group>"; };
+		D8D157B916725C170015349E /* database_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = database_API.m; sourceTree = "<group>"; };
+		D8D157C116725E3D0015349E /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		D8D157C216725E3D0015349E /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		D8D157C316725E3D0015349E /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		D8D157C416725E3E0015349E /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +74,7 @@
 		B31B6D4315C13D5200854074 = {
 			isa = PBXGroup;
 			children = (
+				D8D157C016725D2D0015349E /* database */,
 				B3E583921627155C00BD59DD /* alert */,
 				B31B6D5015C13D5200854074 /* Frameworks */,
 				B31B6D4F15C13D5200854074 /* Products */,
@@ -99,6 +112,20 @@
 				B3E583931627155C00BD59DD /* alert_API.h */,
 				B3E583941627155C00BD59DD /* alert_API.m */,
 			);
+			path = alert;
+			sourceTree = "<group>";
+		};
+		D8D157C016725D2D0015349E /* database */ = {
+			isa = PBXGroup;
+			children = (
+				D8D157B816725C170015349E /* database_API.h */,
+				D8D157B916725C170015349E /* database_API.m */,
+				D8D157C116725E3D0015349E /* FMDatabase.h */,
+				D8D157C216725E3D0015349E /* FMDatabase.m */,
+				D8D157C316725E3D0015349E /* FMResultSet.h */,
+				D8D157C416725E3E0015349E /* FMResultSet.m */,
+			);
+			name = database;
 			path = alert;
 			sourceTree = "<group>";
 		};
@@ -182,6 +209,9 @@
 			files = (
 				B3E583961627155C00BD59DD /* alert_API.m in Sources */,
 				B392D61816271BDE00926ECF /* alert_EventListener.m in Sources */,
+				D8D157BA16725C170015349E /* database_API.m in Sources */,
+				D8D157C516725E3E0015349E /* FMDatabase.m in Sources */,
+				D8D157C716725E3E0015349E /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +219,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D157BB16725C170015349E /* database_API.m in Sources */,
+				D8D157C616725E3E0015349E /* FMDatabase.m in Sources */,
+				D8D157C816725E3E0015349E /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
