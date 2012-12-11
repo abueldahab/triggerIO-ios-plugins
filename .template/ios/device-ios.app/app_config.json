@@ -1,0 +1,21 @@
+{
+  "config_hash": "CONFIG_HASH_HERE", 
+  "ipad_orientation": "landscape", 
+  "iphone_orientation": "portrait", 
+  "modules": [
+    "internal", 
+    "launchimage", 
+    "logging", 
+    "event", 
+    "display", 
+    "contact", 
+    "notification", 
+    "prefs", 
+    "reload", 
+    "request", 
+    "tabs", 
+    "tools"
+  ], 
+  "trigger_domain": "TRIGGER_DOMAIN_HERE", 
+  "uuid": "UUID_HERE"
+}

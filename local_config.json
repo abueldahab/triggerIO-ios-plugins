@@ -1,0 +1,10 @@
+{
+    "ios": {
+        "device": "simulator", 
+        "profiles": {
+            "DEFAULT": {
+                "provisioning_profile": "/Users/alexhorak/forge-workspace/Trigger_Ad_Hoc_01.mobileprovision"
+            }
+        }
+    }
+}
