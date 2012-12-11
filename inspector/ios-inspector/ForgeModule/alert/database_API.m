@@ -10,6 +10,8 @@
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 
+#define FMDBQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
+
 @implementation database_API
 
 + (void)show:(ForgeTask*)task text:(NSString *)text {
@@ -17,21 +19,27 @@
 		[task error:@"You must enter a message"];
 		return;
 	}
-	UIAlertView *database = [[UIAlertView alloc] initWithTitle:@"database"
-													message:text
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"alert"
+                                                       message:text
 												   delegate:nil
 										  cancelButtonTitle:@"OK"
 										  otherButtonTitles:nil];
-	[database show];
+	[alert show];
 	[task success:nil];
 }
 
 + (void)read:(ForgeTask*)task Query:(NSString *)query {
- 
-    //Set path for db
-    NSString *dbPath = @"fetchbase.db";
-    
-    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+
+    [database open];
+    [database executeUpdate:@"create table user(name text primary key, age int)"];
+    NSString *qry = [NSString stringWithFormat:@"insert into user values ('%@', %d)",
+                       @"alexdamh", 22];
+    [database executeUpdate:qry];
+    [database close];
 }
 
 @end

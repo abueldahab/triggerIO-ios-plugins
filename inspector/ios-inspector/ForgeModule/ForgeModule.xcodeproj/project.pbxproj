@@ -15,7 +15,6 @@
 		B3FC51FF15C1523D003574D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC51FE15C1523D003574D9 /* CoreGraphics.framework */; };
 		B3FC524215C177EA003574D9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC524115C177EA003574D9 /* AssetsLibrary.framework */; };
 		B3FC524815C17B2C003574D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC524715C17B2C003574D9 /* SystemConfiguration.framework */; };
-		D89962291672ADD50078DA8E /* fetchbase.db in Resources */ = {isa = PBXBuildFile; fileRef = D89962281672ADD50078DA8E /* fetchbase.db */; };
 		D899622B1672AEBD0078DA8E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D899622A1672AEBD0078DA8E /* libsqlite3.0.dylib */; };
 		D89962521672B6270078DA8E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D899624B1672B6270078DA8E /* FMDatabase.m */; };
 		D89962531672B6270078DA8E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D899624D1672B6270078DA8E /* FMDatabasePool.m */; };
@@ -35,7 +34,6 @@
 		B3FC51FE15C1523D003574D9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B3FC524115C177EA003574D9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B3FC524715C17B2C003574D9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		D89962281672ADD50078DA8E /* fetchbase.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = fetchbase.db; sourceTree = "<group>"; };
 		D899622A1672AEBD0078DA8E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		D899624A1672B6270078DA8E /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		D899624B1672B6270078DA8E /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 			children = (
 				B3E583931627155C00BD59DD /* database_API.h */,
 				B3E583941627155C00BD59DD /* database_API.m */,
-				D89962281672ADD50078DA8E /* fetchbase.db */,
 				D899624A1672B6270078DA8E /* FMDatabase.h */,
 				D899624B1672B6270078DA8E /* FMDatabase.m */,
 				D899624C1672B6270078DA8E /* FMDatabasePool.h */,
@@ -193,7 +190,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D89962291672ADD50078DA8E /* fetchbase.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
