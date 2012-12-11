@@ -33,12 +33,10 @@
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:path];
-
+    
     [database open];
-    [database executeUpdate:@"create table user(name text primary key, age int)"];
-    NSString *qry = [NSString stringWithFormat:@"insert into user values ('%@', %d)",
-                       @"alexdamh", 22];
-    [database executeUpdate:qry];
+    [database executeUpdate:@"INSERT INTO NoteTag VALUES (?, ?)", [NSNumber numberWithInt:0], @"note0"
+     ];
     [database close];
 }
 
