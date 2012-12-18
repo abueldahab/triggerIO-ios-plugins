@@ -15,17 +15,10 @@
 // Returns the JSON array of note objects that match the passed in query.
 + (void)query:(ForgeTask *)task text:(NSString *)queryString {
     
-    // Error checking
     if ([queryString length] == 0) {
         [task error: @"Query is 0 characters long"];
         return;
     }
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Hi there"
-//                                                    message: queryString
-//                                                   delegate: nil
-//                                          cancelButtonTitle: @"sweet"
-//                                          otherButtonTitles: nil];
-//    [alert show];
     
     // Locate Documents directory and open database.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -34,11 +27,17 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    // Query db for queryString and store results in a JSON array of objects
-    FMResultSet *results = [database executeQuery:queryString];
-    while ([results next]) {
-        
+    // Pop all query results into an NSDictionary
+    NSMutableArray *resultsArray = [NSMutableArray array];
+    FMResultSet *resultsSet = [database executeQuery:queryString];
+    while ([resultsSet next]) {
+        [resultsArray addObject:[resultsSet resultDictionary]];
     }
+    
+    // Now parse that dictionary into a JSON array
+    
+    
+    
     
     [database close];
     
