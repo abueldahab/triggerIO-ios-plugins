@@ -1,8 +1,8 @@
 //
-//  alert_API.m
-//  ForgeInspector
+//  database_API.m
+//  ForgeModule
 //
-//  Created by Connor Dunn on 27/07/2012.
+//  Created by explhorak on 12/17/12.
 //  Copyright (c) 2012 Trigger Corp. All rights reserved.
 //
 
@@ -10,37 +10,42 @@
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 
-#define FMDBQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
-
 @implementation database_API
 
-// Returns the JSON array of note objects that match the passed in query
-+ (void)query:(ForgeTask*)task query:(NSString *)query {
-	if ([query length] == 0) {
-		[task error:@"Empty sql statement"];
-		return;
-	}
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"query statement"
-                                                       message:query
-												   delegate:nil
-										  cancelButtonTitle:@"Super"
-										  otherButtonTitles:nil];
-	[alert show];
-	[task success:nil];
+// Returns the JSON array of note objects that match the passed in query.
++ (void)query:(ForgeTask *)task text:(NSString *)queryString {
+    
+    // Error checking
+    if ([queryString length] == 0) {
+        [task error: @"Query is 0 characters long"];
+        return;
+    }
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Hi there"
+//                                                    message: queryString
+//                                                   delegate: nil
+//                                          cancelButtonTitle: @"sweet"
+//                                          otherButtonTitles: nil];
+//    [alert show];
+    
+    // Locate Documents directory and open database.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    // Query db for queryString and store results in a JSON array of objects
+    FMResultSet *results = [database executeQuery:queryString];
+    while ([results next]) {
+        
+    }
+    
+    [database close];
+    
+    [task success:nil];
 }
 
 // Takes a string query as well as query type (either 'tag' or 'contact') & passes
 //  back a JSON array of strings
-//+ (void)entityQuery:(ForgeTask*)task query:(NSString *)query {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *docsPath = [paths objectAtIndex:0];
-//    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
-//    FMDatabase *database = [FMDatabase databaseWithPath:path];
-//    
-//    [database open];
-//    [database executeUpdate:@"INSERT INTO NoteTag VALUES (?, ?)", [NSNumber numberWithInt:0], @"note0"
-//     ];
-//    [database close];
-//}
 
 @end

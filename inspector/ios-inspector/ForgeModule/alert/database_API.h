@@ -1,18 +1,15 @@
 //
 //  database_API.h
-//  ForgeInspector
+//  ForgeModule
 //
-//  Created by Connor Dunn on 27/07/2012.
+//  Created by explhorak on 12/17/12.
 //  Copyright (c) 2012 Trigger Corp. All rights reserved.
 //
-
 
 #import <Foundation/Foundation.h>
 
 @interface database_API : NSObject
 
-+ (void)query:(ForgeTask*)task query:(NSString *)query;
-//+ (void)entityQuery:(ForgeTask*)task query:(NSString *)query;
++ (void)query:(ForgeTask *)task text:(NSString *)queryString;
 
 @end
-

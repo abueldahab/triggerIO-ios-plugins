@@ -1,6 +1,7 @@
 {
 	"modules": [
 		"inspector",
-		"database"
+		"alert",
+        "database"
 	]
 }
