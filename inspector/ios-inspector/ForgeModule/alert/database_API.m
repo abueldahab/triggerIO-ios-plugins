@@ -14,30 +14,33 @@
 
 @implementation database_API
 
-+ (void)show:(ForgeTask*)task text:(NSString *)text {
-	if ([text length] == 0) {
-		[task error:@"You must enter a message"];
+// Returns the JSON array of note objects that match the passed in query
++ (void)query:(ForgeTask*)task query:(NSString *)query {
+	if ([query length] == 0) {
+		[task error:@"Empty sql statement"];
 		return;
 	}
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"alert"
-                                                       message:text
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"query statement"
+                                                       message:query
 												   delegate:nil
-										  cancelButtonTitle:@"OK"
+										  cancelButtonTitle:@"Super"
 										  otherButtonTitles:nil];
 	[alert show];
 	[task success:nil];
 }
 
-+ (void)read:(ForgeTask*)task Query:(NSString *)query {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
-    FMDatabase *database = [FMDatabase databaseWithPath:path];
-    
-    [database open];
-    [database executeUpdate:@"INSERT INTO NoteTag VALUES (?, ?)", [NSNumber numberWithInt:0], @"note0"
-     ];
-    [database close];
-}
+// Takes a string query as well as query type (either 'tag' or 'contact') & passes
+//  back a JSON array of strings
+//+ (void)entityQuery:(ForgeTask*)task query:(NSString *)query {
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *docsPath = [paths objectAtIndex:0];
+//    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+//    FMDatabase *database = [FMDatabase databaseWithPath:path];
+//    
+//    [database open];
+//    [database executeUpdate:@"INSERT INTO NoteTag VALUES (?, ?)", [NSNumber numberWithInt:0], @"note0"
+//     ];
+//    [database close];
+//}
 
 @end

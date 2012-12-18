@@ -11,8 +11,8 @@
 
 @interface database_API : NSObject
 
-+ (void)show:(ForgeTask*)task text:(NSString *)text;
-+ (void)read:(ForgeTask*)task Query:(NSString *)query;
++ (void)query:(ForgeTask*)task query:(NSString *)query;
+//+ (void)entityQuery:(ForgeTask*)task query:(NSString *)query;
 
 @end
 

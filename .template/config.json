@@ -1,75 +1,75 @@
 {
-	"author": "info@fetchnotes.com", 
-	"config_version": "2", 
-	"description": "Your mind's best friend.", 
-	"homepage": "www.fetchnotes.com", 
+	"author": "info@fetchnotes.com",
+	"config_version": "2",
+	"description": "Your mind's best friend.",
+	"homepage": "www.fetchnotes.com",
 	"modules": {
-		"contact": true, 
+		"contact": true,
 		"display": {
 			"orientations": {
-				"android": "any", 
-				"ipad": "landscape", 
+				"android": "any",
+				"ipad": "landscape",
 				"iphone": "portrait"
 			}
-		}, 
-		"event": true, 
+		},
+		"event": true,
 		"icons": {
 			"android": {
-				"36": "icons/F36.png", 
-				"48": "icons/F48.png", 
+				"36": "icons/F36.png",
+				"48": "icons/F48.png",
 				"72": "icons/F72.png"
-			}, 
+			},
 			"ios": {
-				"114": "icons/F114.png", 
-				"144": "icons/F144.png", 
-				"512": "icons/F512.png", 
-				"57": "icons/F57.png", 
-				"72": "icons/F72.png", 
+				"114": "icons/F114.png",
+				"144": "icons/F144.png",
+				"512": "icons/F512.png",
+				"57": "icons/F57.png",
+				"72": "icons/F72.png",
 				"prerendered": true
 			}
-		}, 
-		"is": true, 
+		},
+		"is": true,
 		"launchimage": {
-			"android": "icons/Launch Images/android_HRP.png", 
-			"android-landscape": "icons/Launch Images/android_HRL.png", 
-			"ipad": "icons/Launch Images/iPad_P.png", 
-			"ipad-landscape": "icons/Launch Images/iPad_L.png", 
-			"ipad-landscape-retina": "icons/Launch Images/ipad_HRL.png", 
-			"ipad-retina": "icons/Launch Images/iPad_HRP.png", 
-			"iphone": "icons/Launch Images/iPhone.png", 
-			"iphone-retina": "icons/Launch Images/iPhone_HR.png", 
-			"iphone-retina4": "icons/Launch Images/iPhone5.png"
-		}, 
-		"notification": true, 
+			"android": "img/launch/android_HRP.png",
+			"android-landscape": "img/launch/android_HRL.png",
+			"ipad": "img/launch/iPad_P.png",
+			"ipad-landscape": "img/launch/iPad_L.png",
+			"ipad-landscape-retina": "img/launch/ipad_HRL.png",
+			"ipad-retina": "img/launch/iPad_HRP.png",
+			"iphone": "img/launch/iPhone.png",
+			"iphone-retina": "img/launch/iPhone_HR.png",
+			"iphone-retina4": "img/launch/iPhone5.png"
+		},
+		"notification": true,
 		"package_names": {
-			"android": "com.fetchnotes.notes", 
+			"android": "com.fetchnotes.notes",
 			"ios": "com.fetchnotes.Fetchnotes"
-		}, 
-		"prefs": true, 
-		"reload": true, 
+		},
+		"prefs": true,
+		"reload": true,
 		"request": {
 			"permissions": [
 				"ecs.amazonaws.com"
 			]
-		}, 
-		"tabs": true, 
+		},
+		"tabs": true,
 		"tools": true
-	}, 
-	"name": "Fetchnotes", 
-	"platform_version": "v1.4.22", 
+	},
+	"name": "Fetchnotes",
+	"platform_version": "v1.4.22",
 	"plugins": {
 		"contextmenu": {
 			"hash": "9913ccde26fd85ff45273d9e19bf3c0cfc658ca1"
-		}, 
+		},
 		"database": {
 			"hash": "357a9a0a68dcf8673fbcc542c7c2a5134e04df91"
-		}, 
+		},
 		"events": {
 			"hash": "a55634bcab1e340c9114d04e55e6a96cfc8bed3e"
-		}, 
+		},
 		"keyboard": {
 			"hash": "7b57de34ab98c804f6c1ba9ae2b7b55570245cf6"
 		}
-	}, 
+	},
 	"version": "2.0"
 }

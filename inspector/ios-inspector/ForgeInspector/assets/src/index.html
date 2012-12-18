@@ -10,6 +10,13 @@
 			forge.internal.addEventListener("alert.resume", function () {
 				alert("Weclome back!");
 			});
+            
+            forge.internal.call(
+                'inspector.query',
+                {query: 'SELECT * from Notes'},
+                function () { alert('Success!') },
+                function (e) { alert('Error: '+e.message)}
+            )
 		
 			$(function () {
 				forge.internal.call('inspector.list', {}, function (methods) {
