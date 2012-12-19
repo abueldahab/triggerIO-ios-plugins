@@ -33,15 +33,18 @@
     while ([resultsSet next]) {
         [resultsArray addObject:[resultsSet resultDictionary]];
     }
-    
-    // Now parse that dictionary into a JSON array
-    
-    
-    
+    NSLog(@"NSArray representation %@", resultsArray);
     
     [database close];
     
-    [task success:nil];
+    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:resultsArray
+                                                        options:kNilOptions
+                                                          error:nil];
+    
+    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
+    NSLog(@"Returning this shit: %@", strData);
+
+    [task success:JSONData];
 }
 
 // Takes a string query as well as query type (either 'tag' or 'contact') & passes
