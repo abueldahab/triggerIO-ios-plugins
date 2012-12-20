@@ -48,8 +48,14 @@
     [task success:JSONData];
 }
 
-// Takes a string query as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings
+// Basic CUD query that returns the note id of the CUDed note
++ (void)cudQuery:(ForgeTask *)task text:(NSString *)queryString {
+    
+}
+
+// Takes a stringQuery as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings of that type
 + (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType {
+    //reads a list of all tags or contacts and then returns that, returns just an array of strings
     
 }
 
