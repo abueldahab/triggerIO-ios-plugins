@@ -49,5 +49,8 @@
 }
 
 // Takes a string query as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings
++ (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType {
+    
+}
 
 @end
