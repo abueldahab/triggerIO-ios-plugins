@@ -51,6 +51,23 @@
 // Basic CUD query that returns the note id of the CUDed note
 + (void)cudQuery:(ForgeTask *)task text:(NSString *)queryString {
     
+    // Error handling.
+    if ([queryString length] == 0) {
+        [task error: @"Query is 0 characters long"];
+        return;
+    }
+    
+    // Locate Documents directory and open database.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    [database executeUpdate:queryString];
+    
+    [database close];
+    
 }
 
 // Takes a stringQuery as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings of that type
