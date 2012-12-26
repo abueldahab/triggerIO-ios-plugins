@@ -10,10 +10,14 @@
             
             forge.internal.call(
                                 'database.query',
-                                {text: 'SELECT * FROM Notes},
+                                {text: "INSERT INTO Notes VALUES ('#todo grab milk', '<p>#todo grab milk</p>', 1, first, justnow, synced"},
                                 function () { alert('Success!') },
                                 function (e) { alert('Error: '+e.message)}
                                 )
+            
+            
+            INSERT INTO table_name (column1, column2, column3,...)
+            VALUES (value1, value2, value3,...)
             
             
 //			forge.internal.addEventListener("alert.resume", function () {
