@@ -65,6 +65,7 @@
     [database open];
     
     [database executeUpdate:queryString];
+    [database commit];
     
     [database close];
     
