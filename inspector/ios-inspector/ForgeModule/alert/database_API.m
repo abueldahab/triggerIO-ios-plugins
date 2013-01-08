@@ -43,18 +43,19 @@
     
     // Logging out the finalized, stringified key value pairs
     NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-    NSLog(@"Returning this shit: %@", strData);
+    NSLog(@"********Array*of*notes*******: %@", strData);
     
     [task success:JSONData];
 }
 
-// Basic CUD query that returns the note id of the CUDed note
-+ (void)cudQuery:(ForgeTask *)task text:(NSString *)queryString {
+// CUD notes based on given query.
+// Basic CUD query that returns the note id(s) of the CUDed note. If there are multiple notes, return array of ints
++ (int)cudQuery:(ForgeTask *)task text:(NSString *)queryString {
     
     // Error handling.
     if ([queryString length] == 0) {
         [task error: @"Query is 0 characters long"];
-        return;
+        return 0;
     }
     
     // Locate Documents directory and open database.
@@ -65,15 +66,16 @@
     [database open];
     
     [database executeUpdate:queryString];
+
     
     // Will grab the last inserted row id - this is what we want to return
     int lastId = [database lastInsertRowId];
-    NSLog(@"row id: %d", lastId);
-    
+    NSLog(@"*******row*id*******: %d", lastId);
+
     [database commit];
-    
     [database close];
     
+    return lastId;
 }
 
 // Takes a stringQuery as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings of that type
