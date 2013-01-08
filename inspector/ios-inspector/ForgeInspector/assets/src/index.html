@@ -10,7 +10,7 @@
             
             forge.internal.call(
                                 'database.cudQuery',
-                                {text: "INSERT INTO Notes VALUES ('#todo1 grab milk', '<p>#todo1 grab milk</p>', 2, 'second', 'justnow1', 'synced')"},
+                                {text: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value1','value2','value3','value4','value5')"},
                                 function () { alert('Success!') },
                                 function (e) { alert('Error: '+e.message)}
                                 )

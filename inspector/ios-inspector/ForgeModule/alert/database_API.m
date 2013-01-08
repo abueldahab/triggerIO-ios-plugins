@@ -50,12 +50,12 @@
 
 // CUD notes based on given query.
 // Basic CUD query that returns the note id(s) of the CUDed note. If there are multiple notes, return array of ints
-+ (int)cudQuery:(ForgeTask *)task text:(NSString *)queryString {
++ (void)cudQuery:(ForgeTask *)task text:(NSString *)queryString {
     
     // Error handling.
     if ([queryString length] == 0) {
         [task error: @"Query is 0 characters long"];
-        return 0;
+        return;
     }
     
     // Locate Documents directory and open database.
@@ -66,16 +66,14 @@
     [database open];
     
     [database executeUpdate:queryString];
-
     
-    // Will grab the last inserted row id - this is what we want to return
+    // Changes & last inserted row id
     int lastId = [database lastInsertRowId];
     NSLog(@"*******row*id*******: %d", lastId);
-
-    [database commit];
-    [database close];
+    NSLog(@"Count of changes (should be 1): %d", [database changes]);
     
-    return lastId;
+    [database close];
+//    [task success: lastId];
 }
 
 // Takes a stringQuery as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings of that type
