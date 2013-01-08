@@ -70,7 +70,7 @@
     // Changes & last inserted row id
     int lastId = [database lastInsertRowId];
     NSLog(@"*******row*id*******: %d", lastId);
-    NSLog(@"Count of changes (should be 1): %d", [database changes]);
+//    NSLog(@"Count of changes (should be 1): %d", [database changes]);
     
     [database close];
 //    [task success: lastId];
