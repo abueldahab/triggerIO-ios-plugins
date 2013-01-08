@@ -65,6 +65,11 @@
     [database open];
     
     [database executeUpdate:queryString];
+    
+    // Will grab the last inserted row id - this is what we want to return
+    int lastId = [database lastInsertRowId];
+    NSLog(@"row id: %d", lastId);
+    
     [database commit];
     
     [database close];
