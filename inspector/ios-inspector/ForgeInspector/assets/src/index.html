@@ -8,22 +8,35 @@
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<script>
             
+            // Single insert test
             forge.internal.call(
-                                'database.cudQuery',
-                                {text: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value7','value8','value9','value10','value11')"},
+                                'database.writeAll',
+                                {text: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value16','value15','value14','value13','value12')"},
                                 function () { alert('Success!') },
                                 function (e) { alert('Error: '+e.message)}
                                 )
             
+            // Multiple insert test
+            forge.internal.call(
+                                'database.writeAll',
+                                {queries:["query0...", "query1....", "query2...", "query3...."]},
+                                function () { alert('Success!') },
+                                function (e) { alert('Error: '+e.message)}
+                                )
+                                
+            
+            
+            // Multiple inserts per single query - doesn't need to support
 //            forge.internal.call(
 //                                'database.cudQuery',
-//                                {text: "insert into NoteTag (tag, local_id) values ('tag7', 7), ('tag8', 8), ('tag9', 9)"},
+//                                {text: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('test11','test22','test33','test33.5','test44.5'), ('test44','test55','test66','test66.5','test77.5'), ('test77','test88','test99','test99.5','test110.5')"},
 //                                function () { alert('Success!') },
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
             
-//            INSERT INTO table_name (column1, column2, column3,...)
-//            VALUES (value1, value2, value3,...)
+            
+            
+            
             
             
 //			forge.internal.addEventListener("alert.resume", function () {

@@ -49,8 +49,9 @@
 }
 
 // CUD notes based on given query.
-// Basic CUD query that returns the note id(s) of the CUDed note. If there are multiple notes, return array of ints
-+ (void)cudQuery:(ForgeTask *)task text:(NSString *)queryString {
+// Basic CUD query that returns the note id(s) of the CUDed note.
+// Can also handle array of queries and returns array of ints
++ (void)writeAll:(ForgeTask *)task text:(NSString *)queryString {
     
     // Error handling.
     if ([queryString length] == 0) {
@@ -70,7 +71,6 @@
     // Changes & last inserted row id
     int lastId = [database lastInsertRowId];
     NSLog(@"*******row*id*******: %d", lastId);
-//    NSLog(@"Count of changes (should be 1): %d", [database changes]);
     
     [database close];
 //    [task success: lastId];
