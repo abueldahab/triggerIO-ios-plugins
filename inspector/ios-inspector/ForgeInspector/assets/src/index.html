@@ -9,21 +9,21 @@
 		<script>
             
             // Single insert test
-            forge.internal.call(
-                                'database.writeAll',
-                                {text: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value16','value15','value14','value13','value12')"},
-                                function () { alert('Success!') },
-                                function (e) { alert('Error: '+e.message)}
-                                )
+//            forge.internal.call(
+//                                'database.writeAll',
+//                                {queries: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value161','value151','value141','value131','value121')"},
+//                                function () { alert('Success!') },
+//                                function (e) { alert('Error: '+e.message)}
+//                                )
             
             // Multiple insert test
             forge.internal.call(
                                 'database.writeAll',
-                                {queries:["query0...", "query1....", "query2...", "query3...."]},
+                                {queries: ["insert into Notes (text,html,server_id,last_updated,sync_status) values ('value162','value152','value142','value132','value122')", "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value163','value153','value143','value133','value121')"]},
                                 function () { alert('Success!') },
                                 function (e) { alert('Error: '+e.message)}
                                 )
-                                
+            
             
             
             // Multiple inserts per single query - doesn't need to support

@@ -51,13 +51,7 @@
 // CUD notes based on given query.
 // Basic CUD query that returns the note id(s) of the CUDed note.
 // Can also handle array of queries and returns array of ints
-+ (void)writeAll:(ForgeTask *)task text:(NSString *)queryString {
-    
-    // Error handling.
-    if ([queryString length] == 0) {
-        [task error: @"Query is 0 characters long"];
-        return;
-    }
++ (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings {
     
     // Locate Documents directory and open database.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -66,7 +60,10 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    [database executeUpdate:queryString];
+    NSInteger count = [queryStrings count];
+    for (int i = 0; i < count; i ++) {
+        [database executeUpdate:queryStrings[i]];
+    }
     
     // Changes & last inserted row id
     int lastId = [database lastInsertRowId];

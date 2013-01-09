@@ -10,8 +10,13 @@
 
 @interface database_API : NSObject
 
+// For reading
 + (void)query:(ForgeTask *)task text:(NSString *)queryString;
-+ (void)writeAll:(ForgeTask *)task text:(NSString *)queryString;
+
+// For writing
++ (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings;
+
+// For CUDing entities such as #s and @s
 + (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType;
 
 @end
