@@ -60,17 +60,21 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
+    // Iterate through each query and excuteUpdate()
+    // Wrap int into a NSNumber to add to NSMutableArray
     NSInteger count = [queryStrings count];
-    for (int i = 0; i < count; i ++) {
+    NSMutableArray *rowIds = [[NSMutableArray alloc] init];
+    int lastInsertRowId = 0;
+    for (int i = 0; i < count; i++) {
         [database executeUpdate:queryStrings[i]];
+        lastInsertRowId = [database lastInsertRowId];
+        NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
+        [rowIds addObject:lastInsertRowIdInteger];
     }
     
-    // Changes & last inserted row id
-    int lastId = [database lastInsertRowId];
-    NSLog(@"*******row*id*******: %d", lastId);
-    
     [database close];
-//    [task success: lastId];
+    NSLog(@"Array of last objects added %@", rowIds);
+    [task success: rowIds];
 }
 
 // Takes a stringQuery as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings of that type
