@@ -73,7 +73,7 @@
     }
     
     [database close];
-    NSLog(@"Array of last objects added %@", rowIds);
+    NSLog(@"*******Array*of*last*objects*added****** %@", rowIds);
     [task success: rowIds];
 }
 
