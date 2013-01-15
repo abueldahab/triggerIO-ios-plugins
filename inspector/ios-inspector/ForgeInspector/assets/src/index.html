@@ -9,14 +9,13 @@
 		<script>
             
 //*************************************FORM ASSIST*********************************************
-            forge.internal.call
-                               'kill_form_assist.kill',
-                                {text: ""},
+
+            forge.internal.call(
+                                'database.killBar',
+                                {text: "select * from Notes  order by last_updated desc  limit 0,25;"},
                                 function () { alert('Success!') },
                                 function (e) { alert('Error: '+e.message)}
                                 )
-
-            
             
             
 //*************************************DATABASE*********************************************

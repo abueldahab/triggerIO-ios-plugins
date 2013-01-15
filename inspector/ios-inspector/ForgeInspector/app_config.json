@@ -2,7 +2,6 @@
 	"modules": [
 		"inspector",
 		"alert",
-        "database",
-        "kill_form_assist"
+        "database"
 	]
 }

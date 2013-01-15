@@ -12,5 +12,6 @@
 @interface alert_API : NSObject
 
 + (void)show:(ForgeTask*)task text:(NSString *)text;
++ (void)killBar:(ForgeTask*)task text:(NSString *)text;
 
 @end

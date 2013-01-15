@@ -10,7 +10,10 @@
 
 @implementation kill_form_assist_API
 
-+ (void)kill:(ForgeTask *)task text:(NSString *)text {
++ (void)killBar:(ForgeTask *)task text:(NSString *)text {
+    
+    NSLog(@"hi********************");
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:@"UIKeyboardCandidateCorrectionDidChangeNotification" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         UIWindow *keyboardWindow = nil;
         for (UIWindow *testWindow in [[UIApplication sharedApplication] windows]) {

@@ -10,6 +10,6 @@
 
 @interface kill_form_assist_API : NSObject
 
-+ (void)kill:(ForgeTask *)task text:(NSString *)text;
++ (void)killBar:(ForgeTask *)task text:(NSString *)text;
 
 @end
