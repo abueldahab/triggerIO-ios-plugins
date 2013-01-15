@@ -19,6 +19,4 @@
 // For CUDing entities such as #s and @s
 + (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType;
 
-+ (void)killBar:(ForgeTask *)task text:(NSString *)text;
-
 @end

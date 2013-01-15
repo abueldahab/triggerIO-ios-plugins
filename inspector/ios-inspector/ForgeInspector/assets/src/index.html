@@ -11,7 +11,7 @@
 //*************************************FORM ASSIST*********************************************
 
             forge.internal.call(
-                                'database.killBar',
+                                'kill_form_assist.killBar',
                                 {text: "select * from Notes  order by last_updated desc  limit 0,25;"},
                                 function () { alert('Success!') },
                                 function (e) { alert('Error: '+e.message)}
