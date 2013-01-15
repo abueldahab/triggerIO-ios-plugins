@@ -24,6 +24,7 @@
 		D8177DF2168007BD006F9B01 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8177DEC168007BD006F9B01 /* FMResultSet.m */; };
 		D8177DF616800843006F9B01 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D8177DF516800843006F9B01 /* libsqlite3.dylib */; };
 		D8177DFC168009A8006F9B01 /* database_API.m in Sources */ = {isa = PBXBuildFile; fileRef = D8177DFB168009A8006F9B01 /* database_API.m */; };
+		D8546F4A16A4D39000494515 /* kill_form_assist_API.m in Sources */ = {isa = PBXBuildFile; fileRef = D8546F4916A4D39000494515 /* kill_form_assist_API.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,8 @@
 		D8177DF516800843006F9B01 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D8177DFA168009A8006F9B01 /* database_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = database_API.h; sourceTree = "<group>"; };
 		D8177DFB168009A8006F9B01 /* database_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = database_API.m; sourceTree = "<group>"; };
+		D8546F4816A4D39000494515 /* kill_form_assist_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kill_form_assist_API.h; path = alert/kill_form_assist_API.h; sourceTree = "<group>"; };
+		D8546F4916A4D39000494515 /* kill_form_assist_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kill_form_assist_API.m; path = alert/kill_form_assist_API.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D8177DF516800843006F9B01 /* libsqlite3.dylib */,
+				D8546F4616A4D36A00494515 /* kill_form_assist */,
 				B3E583921627155C00BD59DD /* alert */,
 				D8177DF916800952006F9B01 /* database */,
 				D8177DE016800794006F9B01 /* fmdb */,
@@ -155,6 +159,15 @@
 			);
 			name = database;
 			path = alert;
+			sourceTree = "<group>";
+		};
+		D8546F4616A4D36A00494515 /* kill_form_assist */ = {
+			isa = PBXGroup;
+			children = (
+				D8546F4816A4D39000494515 /* kill_form_assist_API.h */,
+				D8546F4916A4D39000494515 /* kill_form_assist_API.m */,
+			);
+			name = kill_form_assist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +257,7 @@
 				D8177DF1168007BD006F9B01 /* fmdb.m in Sources */,
 				D8177DF2168007BD006F9B01 /* FMResultSet.m in Sources */,
 				D8177DFC168009A8006F9B01 /* database_API.m in Sources */,
+				D8546F4A16A4D39000494515 /* kill_form_assist_API.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,22 @@
+TForgeModuleResources
+v5
+r1
+cCheck dependencies
+cTouch /Users/alexhorak/forge-workspace/fetchnotes/inspector/ios-inspector/ForgeModule/build/Release-iphoneos/plugin.bundle
+
+N/Users/alexhorak/forge-workspace/fetchnotes/inspector/ios-inspector/ForgeModule/build/Release-iphoneos/plugin.bundle
+t2
+s0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies23d993a1f5a4b641^48c59fa1f5a4b641^---0#1#0#--18"Check dependencies36"F382F803-4AD3-45D8-B5F3-7E306C11A70B-
+
+CTouch /Users/alexhorak/forge-workspace/fetchnotes/inspector/ios-inspector/ForgeModule/build/Release-iphoneos/plugin.bundle
+s379909537.628862
+e379909537.654376
+r1
+xTouch
+x/Users/alexhorak/forge-workspace/fetchnotes/inspector/ios-inspector/ForgeModule/build/Release-iphoneos/plugin.bundle
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection122"Touch /Users/alexhorak/forge-workspace/fetchnotes/inspector/ios-inspector/ForgeModule/build/Release-iphoneos/plugin.bundle3160a1a1f5a4b641^7385a7a1f5a4b641^---0#0#0#--1168"Touch build/Release-iphoneos/plugin.bundle    cd /Users/alexhorak/forge-workspace/fetchnotes/inspector/ios-inspector/ForgeModule    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/usr/local/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Tools:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/alexhorak/forge-workspace/fetchnotes/inspector/ios-inspector/ForgeModule/build/Release-iphoneos/plugin.bundle36"83EB40EC-448D-42ED-98A7-F2A3FCA50039-
+

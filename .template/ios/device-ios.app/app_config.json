@@ -13,8 +13,10 @@
     "prefs", 
     "reload", 
     "request", 
+    "sms", 
     "tabs", 
-    "tools"
+    "tools", 
+    "database"
   ], 
   "trigger_domain": "TRIGGER_DOMAIN_HERE", 
   "uuid": "UUID_HERE"

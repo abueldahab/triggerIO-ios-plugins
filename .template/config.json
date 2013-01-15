@@ -1,6 +1,6 @@
 {
 	"author": "info@fetchnotes.com", 
-	"config_version": "2.1", 
+	"config_version": "2", 
 	"description": "Your mind's best friend.", 
 	"homepage": "www.fetchnotes.com", 
 	"modules": {
@@ -32,14 +32,13 @@
 		"launchimage": {
 			"android": "img/launch/android_HRP.png", 
 			"android-landscape": "img/launch/android_HRL.png", 
-			"hide-manually": true, 
-			"ipad": "img/launch/iPad_P.png", 
-			"ipad-landscape": "img/launch/iPad_L.png", 
-			"ipad-landscape-retina": "img/launch/ipad_HRL.png", 
-			"ipad-retina": "img/launch/iPad_HRP.png", 
-			"iphone": "img/launch/iPhone.png", 
-			"iphone-retina": "img/launch/iPhone_HR.png", 
-			"iphone-retina4": "img/launch/iPhone5.png"
+			"ipad": "img/launchimages/iPad_P.png", 
+			"ipad-landscape": "img/launchimages/iPad_L.png", 
+			"ipad-landscape-retina": "img/launchimages/ipad_HRL.png", 
+			"ipad-retina": "img/launchimages/iPad_HRP.png", 
+			"iphone": "img/launchimages/iPhone.png", 
+			"iphone-retina": "img/launchimages/iPhone_HR.png", 
+			"iphone-retina4": "img/launchimages/iPhone5.png"
 		}, 
 		"notification": true, 
 		"package_names": {
@@ -53,10 +52,16 @@
 				"ecs.amazonaws.com"
 			]
 		}, 
+		"sms": true, 
 		"tabs": true, 
 		"tools": true
 	}, 
 	"name": "Fetchnotes", 
 	"platform_version": "v1.4.24", 
-	"version": "2.1"
+	"plugins": {
+		"database": {
+			"hash": "7b5afa648ec320a3f8125b08d7680de82eeedbe7"
+		}
+	}, 
+	"version": "3.2"
 }

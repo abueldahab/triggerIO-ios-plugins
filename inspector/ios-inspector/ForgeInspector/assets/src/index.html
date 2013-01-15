@@ -8,22 +8,51 @@
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<script>
             
+//*************************************FORM ASSIST*********************************************
+            forge.internal.call
+                               'kill_form_assist.kill',
+                                {text: ""},
+                                function () { alert('Success!') },
+                                function (e) { alert('Error: '+e.message)}
+                                )
+
+            
+            
+            
+//*************************************DATABASE*********************************************
+            
             // Single insert test
 //            forge.internal.call(
 //                                'database.writeAll',
-//                                {queries: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value161','value151','value141','value131','value121')"},
+//                                {queries: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value1611','value1511','value1411','value1311','value1211')"},
 //                                function () { alert('Success!') },
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
             
-            // Multiple insert test
-            forge.internal.call(
-                                'database.writeAll',
-                                {queries: ["insert into Notes (text,html,server_id,last_updated,sync_status) values ('value662','value552','value442','value332','value222')", "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value663','value553','value443','value333','value221')"]},
-                                function () { alert('Success!') },
-                                function (e) { alert('Error: '+e.message)}
-                                )
+            // database query test
+//            forge.internal.call(
+//                                'database.query',
+//                                {text: "select * from Notes  order by last_updated desc  limit 0,25;"},
+//                                function () { alert('Success!') },
+//                                function (e) { alert('Error: '+e.message)}
+//                                )
             
+            
+//            // Multiple insert test
+//            forge.internal.call(
+//                                'database.writeAll',
+//                                {queries: ["insert into Notes (text,html,server_id,last_updated,sync_status) values ('value66122','value15522','valu1e4422','val1ue3322','v1alue2222')", "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value66133','value55133','value44331','value33133','value21221')"]},
+//                                function () { alert('Success!') },
+//                                function (e) { alert('Error: '+e.message)}
+//                                )
+
+            // Update and Insert query
+//            forge.internal.call(
+//                                'database.writeAll',
+//                                {queries: ["update Notes set text='va2l0', html='val21',server_id='va2l2',last_updated='va2l3', sync_status='v2al4' where local_id='local_id2_lulz'", "delete from Notes where local_id = 20", "insert into Notes (text,html,server_id,last_updated,sync_status) values ('poop','poobar','pooville','pootan','poofoo')"]},
+//                                function () { alert('Success!') },
+//                                function (e) { alert('Error: '+e.message)}
+//                                )
             
             
             // Multiple inserts per single query - doesn't need to support
