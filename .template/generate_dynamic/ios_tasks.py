@@ -12,13 +12,11 @@ import time
 import uuid
 import shutil
 import sys
-import hashlib
 from zipfile import ZipFile, ZIP_DEFLATED
 
 import lib
 from lib import temp_file, task, read_file_as_str
 from utils import run_shell, ensure_lib_available, ProcessGroup
-from utils import which
 
 LOG = logging.getLogger(__name__)
 
@@ -204,70 +202,20 @@ See "Preparing your apps for app stores" in our docs: http://current-docs.trigge
 					},
 					more_info="http://current-docs.trigger.io/tools/ios-windows.html"
 				)
-
-			cache_file = None
-			development_certificate = False
-			try:
-				cert_name = subprocess.check_output(['java', '-jar', ensure_lib_available(build, 'p12name.jar'), certificate_path, certificate_password]).strip()
-				if cert_name.startswith('iPhone Developer:'):
-					development_certificate = True
-			except Exception:
-				pass
-
-			if development_certificate:
-				# Development certificate signings can be cached
-				# Hash for Forge binary + signing certificate + profile + info.plist
-				h = hashlib.sha1()
-				with open(path.join(path_to_app, 'Forge'), 'rb') as binary_file:
-					h.update(binary_file.read())
-				with open(path.join(path_to_app, 'Info.plist'), 'rb') as info_plist_file:
-					h.update(info_plist_file.read())
-				with open(certificate_path, 'rb') as certificate_file:
-					h.update(certificate_file.read())
-				with open(path_to_embedded_profile, 'rb') as embedded_file:
-					h.update(embedded_file.read())
-
-				if not path.exists(path.abspath(path.join(self.path_to_ios_build, '..', '.template', 'ios-signing-cache'))):
-					os.makedirs(path.abspath(path.join(self.path_to_ios_build, '..', '.template', 'ios-signing-cache')))
-				cache_file = path.abspath(path.join(self.path_to_ios_build, '..', '.template', 'ios-signing-cache', h.hexdigest()))
-
-			# XXX: Currently cache file is never saved, see below.
-			if cache_file is not None and path.exists(cache_file):
-				with temp_file() as resource_rules_temp:
-					shutil.copy2(path.join(path_to_app, 'ResourceRules.plist'), resource_rules_temp)
-					zip_to_extract = ZipFile(cache_file)
-					zip_to_extract.extractall(path_to_app)
-					zip_to_extract.close()
-					shutil.copy2(resource_rules_temp, path.join(path_to_app, 'ResourceRules.plist'))
-				return
-
+			
 			# Remote
 			LOG.info('Sending app to remote server for codesigning. Uploading may take some time.')
 			
 			# Zip up app
 			with temp_file() as app_zip_file:
-				if cache_file is None:
-					with ZipFile(app_zip_file, 'w', compression=ZIP_DEFLATED) as app_zip:
-						for root, dirs, files in os.walk(path_to_app, topdown=False):
-							for file in files:
-								app_zip.write(path.join(root, file), path.join(root[len(path_to_app):], file))
-								os.remove(path.join(root, file))
-							for dir in dirs:
-								os.rmdir(path.join(root, dir))
-				else:
-					with ZipFile(app_zip_file, 'w', compression=ZIP_DEFLATED) as app_zip:
-						app_zip.write(path.join(path_to_app, 'Forge'), 'Forge')
-						app_zip.write(path.join(path_to_app, 'Info.plist'), 'Info.plist')
-						app_zip.write(path_to_embedded_profile, 'embedded.mobileprovision')
-						with temp_file() as tweaked_resource_rules:
-							import biplist
-							rules = biplist.readPlist(path.join(path_to_app, 'ResourceRules.plist'))
-							# Don't sign anything
-							rules['rules']['.*'] = False
-							with open(tweaked_resource_rules, 'wb') as tweaked_resource_rules_file:
-								biplist.writePlist(rules, tweaked_resource_rules_file)
-							app_zip.write(tweaked_resource_rules, 'ResourceRules.plist')
-								
+				with ZipFile(app_zip_file, 'w', compression=ZIP_DEFLATED) as app_zip:
+					for root, dirs, files in os.walk(path_to_app, topdown=False):
+						for file in files:
+							app_zip.write(path.join(root, file), path.join(root[len(path_to_app):], file))
+							os.remove(path.join(root, file))
+						for dir in dirs:
+							os.rmdir(path.join(root, dir))
+							
 							
 				from poster.encode import multipart_encode
 				from poster.streaminghttp import register_openers
@@ -336,10 +284,6 @@ See "Preparing your apps for app stores" in our docs: http://current-docs.trigge
 					zip_to_extract = ZipFile(signed_zip_file)
 					zip_to_extract.extractall(path_to_app)
 					zip_to_extract.close()
-
-					# XXX: Caching currently disabled as Info.plist changes on every build
-					"""if cache_file is not None:
-						shutil.copy2(signed_zip_file, cache_file)"""
 					LOG.info('Signed app received, continuing with packaging.')
 
 		else:
@@ -540,18 +484,9 @@ See "Preparing your apps for app stores" in our docs: http://current-docs.trigge
 			logfile = tempfile.mkstemp()[1]
 			process_group = ProcessGroup()
 
-			ios_sim_cmd = [path.join(self._lib_path(), ios_sim_binary), "launch", path_to_app, '--stderr', logfile]
-
-			sdk = build.tool_config.get('ios.simulatorsdk')
-			if sdk is not None:
-				ios_sim_cmd = ios_sim_cmd + ['--sdk', sdk]
-			family = build.tool_config.get('ios.simulatorfamily')
-			if family is not None:
-				ios_sim_cmd = ios_sim_cmd + ['--family', family]
-
 			LOG.info('Starting simulator')
 			process_group.spawn(
-				ios_sim_cmd,
+				[path.join(self._lib_path(), ios_sim_binary), "launch", path_to_app, '--stderr', logfile],
 				fail_if=could_not_start_simulator
 			)
 
@@ -627,8 +562,6 @@ See "Preparing your apps for app stores" in our docs: http://current-docs.trigge
 
 				run_shell(*win_ios_install, fail_silently=False, command_log_level=logging.INFO, check_for_interrupt=True)
 		else:
-			if not which('ideviceinstaller'):
-				raise Exception("Can't find ideviceinstaller - is it installed and on your PATH?")
 			with temp_file() as ipa_path:
 				self.create_ipa_from_app(
 					build=build,
@@ -650,9 +583,7 @@ See "Preparing your apps for app stores" in our docs: http://current-docs.trigge
 				
 				linux_ios_install.append('-i')
 				linux_ios_install.append(ipa_path)
-				run_shell(*linux_ios_install, fail_silently=False,
-					command_log_level=logging.INFO,
-					check_for_interrupt=True)
+				run_shell(*linux_ios_install, fail_silently=False, command_log_level=logging.INFO, check_for_interrupt=True)
 				LOG.info('App installed, you will need to run the app on the device manually.')
 	
 	def _lib_path(self):

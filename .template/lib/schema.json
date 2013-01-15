@@ -80,11 +80,6 @@
 						"type": "string",
 						"required": true
 					},
-					"type": {
-						"type": "string",
-						"required": false,
-						"enum": ["external", "project"]
-					},
 					"config": {
 						"type": "object",
 						"required": false
@@ -324,6 +319,12 @@
 					"_docs": "http://docs.trigger.io/en/v1.4/modules/geolocation.html",
 					"type": "boolean"
 				},
+				"gmail": {
+					"required": false,
+					"description": "Helper API to interact with gmail pages",
+					"_docs": "http://docs.trigger.io/en/v1.4/modules/gmail.html",
+					"type": "boolean"
+				},
 				"icons": {
 					"required": false, 
 					"type": "object", 
@@ -452,6 +453,19 @@
 					"_docs": "http://docs.trigger.io/en/v1.4/modules/is.html",
 					"description": "API methods to determine information about the platform currently running your app.",
 					"type": "boolean"
+				},
+				"jquery": {
+					"required": false,
+					"type": "object",
+					"_docs": "http://docs.trigger.io/en/v1.4/modules/jquery.html",
+					"description": "Include a version of jQuery in your app.",
+					"properties": {
+						"version": {
+							"required": true,
+							"type": "string",
+							"enum": ["1.4.3", "1.5.2", "1.6.4", "1.7.1"]
+						}
+					}
 				},
 				"launchimage": {
 					"required": false, 

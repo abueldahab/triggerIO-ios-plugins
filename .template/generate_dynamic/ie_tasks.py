@@ -27,19 +27,12 @@ def package_ie(build, **kw):
 	
 	# JCB: need to check nsis version in stdout here?
 
-	# Figure out which signtool to use
-	signtool = _check_signtool(build)
-	if signtool == None:
-		raise CouldNotLocate("Make sure the 'signtool' or 'osslsigncode' executable is in your path")
-	LOG.info('Signing IE executables with: {signtool}'.format(signtool=signtool))	
-
 	# Sign executables
 	certificate = build.tool_config.get('ie.profile.developer_certificate')
 	certificate_path = build.tool_config.get('ie.profile.developer_certificate_path')
 	certificate_password = build.tool_config.get('ie.profile.developer_certificate_password')
 	if certificate:
 		_sign_app(build=build, 
-				  signtool=signtool,
 				  certificate=certificate, 
 				  certificate_path=certificate_path,
 				  certificate_password=certificate_password)
@@ -72,7 +65,6 @@ def package_ie(build, **kw):
 			shutil.move(exe, destination)
 			if certificate:
 				_sign_executable(build=build, 
-								 signtool=signtool,
 								 target=destination, 
 								 certificate=certificate, 
 								 certificate_path=certificate_path, 
@@ -93,73 +85,53 @@ def _uuid_to_ms_clsid(build):
 	return "{" + str(clsid).upper() + "}"
 
 
-def _check_signtool(build):
-	for option in ["signtool /?", "osslsigncode -v"]:
-		LOG.info("Checking: %s", option[:-3])	
-		check = lib.PopenWithoutNewConsole(option, shell=True, stdout=PIPE, stderr=STDOUT)
-		stdout, stderr = check.communicate()
-		if check.returncode == 0:
-			return option[:-3]
-	LOG.info("Could not find anything: %s" % stdout)
-	return None
-
-
-def _sign_app(build, signtool=None, certificate=None, certificate_path=None, certificate_password=""):
+def _sign_app(build, certificate=None, certificate_path=None, certificate_password=""):
 	'Sign all executable code'
+
+	signtool_check = lib.PopenWithoutNewConsole('signtool /?', shell=True, stdout=PIPE, stderr=STDOUT)
+	stdout, stderr = signtool_check.communicate()
+	
+	if signtool_check.returncode != 0:
+		raise CouldNotLocate("Make sure the 'signtool' executable is in your path")
 
 	path_win32 = path.join("development", "ie", "build", "Win32", "Release")	
 	path_x64   = path.join("development", "ie", "build", "x64",	  "Release")	
 
-	_sign_executable(build, signtool, path.join(path_win32, "bho32.dll"),
+	_sign_executable(build, path.join(path_win32, "bho32.dll"),
 					 certificate, certificate_path, certificate_password)
-	_sign_executable(build, signtool, path.join(path_win32, "forge32.dll"),
+	_sign_executable(build, path.join(path_win32, "forge32.dll"),
 					 certificate, certificate_path, certificate_password)
-	_sign_executable(build, signtool, path.join(path_win32, "forge32.exe"),
+	_sign_executable(build, path.join(path_win32, "forge32.exe"),
 					 certificate, certificate_path, certificate_password)
-	_sign_executable(build, signtool, path.join(path_win32, "frame32.dll"),
+	_sign_executable(build, path.join(path_win32, "frame32.dll"),
 					 certificate, certificate_path, certificate_password)
-	_sign_executable(build, signtool, path.join(path_x64, "bho64.dll"),
+	_sign_executable(build, path.join(path_x64, "bho64.dll"),
 					 certificate, certificate_path, certificate_password)
-	_sign_executable(build, signtool, path.join(path_x64, "forge64.dll"),
+	_sign_executable(build, path.join(path_x64, "forge64.dll"),
 					 certificate, certificate_path, certificate_password)
-	_sign_executable(build, signtool, path.join(path_x64, "forge64.exe"),
+	_sign_executable(build, path.join(path_x64, "forge64.exe"),
 					 certificate, certificate_path, certificate_password)
-	_sign_executable(build, signtool, path.join(path_x64, "frame64.dll"),
+	_sign_executable(build, path.join(path_x64, "frame64.dll"),
 					 certificate, certificate_path, certificate_password)
 
 
-def _sign_executable(build, signtool, target, certificate = None, certificate_path = None, certificate_password = ""):
+def _sign_executable(build, target, certificate = None, certificate_path = None, certificate_password = ""):
 	'Sign a single executable file'
 
 	LOG.info('Signing {target}'.format(target=target))
 
-	if signtool == 'signtool':
-		command = lib.PopenWithoutNewConsole('signtool sign /f {cert} /p {password} /v /t {time} "{target}"'.format(
-			cert=path.join(certificate_path, certificate),
-			password=certificate_password,
-			time='http://timestamp.comodoca.com/authenticode',
-			target=target),
-			stdout=PIPE, stderr=STDOUT, shell=True
-		)
-
-	elif signtool == 'osslsigncode': 
-		command = lib.PopenWithoutNewConsole('osslsigncode -pkcs12 {cert} -pass {password} -t {time} -in "{target}" -out "{target}.signed"'.format(
-			cert=path.join(certificate_path, certificate),
-			password=certificate_password,
-			time='http://timestamp.comodoca.com/authenticode',
-			target=target),
-			stdout=PIPE, stderr=STDOUT, shell=True
-		)
-
-	else:
-		raise IEError("problem signing IE build, unknown code sign tool: {signtool}".format(signtool=signtool))
-
-	out, err = command.communicate()
-	if command.returncode != 0:
-		raise IEError("problem signing IE build: {stdout}".format(stdout=out))
-
-	if signtool == 'osslsigncode':
-		shutil.move(target + ".signed", target)	
+	signtool = lib.PopenWithoutNewConsole('signtool sign /f {cert} /p {password} /v /t {time} "{target}"'.format(
+		cert=path.join(certificate_path, certificate),
+		password=certificate_password,
+		time='http://timestamp.comodoca.com/authenticode',
+		target=target),
+		stdout=PIPE, stderr=STDOUT, shell=True
+	)
+	
+	out, err = signtool.communicate()
+	
+	if signtool.returncode != 0:
+		raise IEError("problem running IE build: {stdout}".format(stdout=out))
 
 
 

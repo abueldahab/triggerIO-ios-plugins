@@ -30,8 +30,8 @@
 		}, 
 		"is": true, 
 		"launchimage": {
-			"android": "img/launch/android_HRP.png", 
-			"android-landscape": "img/launch/android_HRL.png", 
+			"android": "img/launchimages/android_HRP.png", 
+			"android-landscape": "img/launchimages/android_HRL.png", 
 			"ipad": "img/launchimages/iPad_P.png", 
 			"ipad-landscape": "img/launchimages/iPad_L.png", 
 			"ipad-landscape-retina": "img/launchimages/ipad_HRL.png", 
@@ -57,11 +57,20 @@
 		"tools": true
 	}, 
 	"name": "Fetchnotes", 
-	"platform_version": "v1.4.24", 
+	"platform_version": "v1.4.22", 
 	"plugins": {
+		"contextmenu": {
+			"hash": "9913ccde26fd85ff45273d9e19bf3c0cfc658ca1"
+		}, 
 		"database": {
-			"hash": "7b5afa648ec320a3f8125b08d7680de82eeedbe7"
+			"hash": "65b556a5e2fc0c214077559c2b7f411fee896409"
+		}, 
+		"events": {
+			"hash": "a55634bcab1e340c9114d04e55e6a96cfc8bed3e"
+		}, 
+		"keyboard": {
+			"hash": "7b57de34ab98c804f6c1ba9ae2b7b55570245cf6"
 		}
 	}, 
-	"version": "3.2"
+	"version": "3.1"
 }

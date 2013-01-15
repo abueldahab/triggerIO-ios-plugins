@@ -33,16 +33,6 @@
 					"required": false,
 					"description": "either 'simulator', 'device' or a specific device ID"
 				},
-				"simulatorsdk": {
-					"type": "string",
-					"required": false,
-					"description": "SDK version to launch simulator at"
-				},
-				"simulatorfamily": {
-					"type": "string",
-					"required": false,
-					"description": "Device family to launch simulator with, either 'iphone' or 'ipad'"
-				},
 				"profile": {
 					"required": false,
 					"type": "object",
