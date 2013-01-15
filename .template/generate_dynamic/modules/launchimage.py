@@ -65,18 +65,18 @@ def platform_specific_templating(build):
 		}}},
 		{'when': {'platform_is': 'android',
 			'config_property_exists': 'modules.launchimage.background-color'},
-			'do': {'find_and_replace': {
-				"in": ('android/ForgeTemplate/res/values/styles.xml',),
-				"find": "#000000<!-- LAUNCHIMAGE_BACKGROUND -->",
-				"replace": "${modules.launchimage['background-color']}"
+			'do': {'set_element_value_xml': {
+				"file": 'android/ForgeTemplate/res/values/styles.xml',
+				"value": "${modules.launchimage['background-color']}",
+				"element": "color[@name='custom_launchimage_background']",
 			}
 		}},
 		{'when': {'platform_is': 'android',
 			'config_property_exists': 'modules.launchimage.background-color'},
-			'do': {'find_and_replace': {
-				"in": ('android/ForgeTemplate/res/values-v11/styles.xml',),
-				"find": "#000000<!-- LAUNCHIMAGE_BACKGROUND -->",
-				"replace": "${modules.launchimage['background-color']}"
-			}
+			'do': {'set_element_value_xml': {
+				"file": 'android/ForgeTemplate/res/values-v11/styles.xml',
+				"value": "${modules.launchimage['background-color']}",
+				"element": "color[@name='custom_launchimage_background']",
+			},
 		}},
 	]
