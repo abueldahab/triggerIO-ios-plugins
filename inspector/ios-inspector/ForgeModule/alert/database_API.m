@@ -12,6 +12,11 @@
 
 @implementation database_API
 
+// Takes JSONArray that contains strings to construct the database schema
++ (void)createTables:(ForgeTask *)task queries:(NSArray *)queryStrings {
+    
+}
+
 // Returns the JSON array of note objects that match the passed in query.
 + (void)query:(ForgeTask *)task text:(NSString *)queryString {
     

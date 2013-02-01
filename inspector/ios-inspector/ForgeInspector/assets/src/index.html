@@ -8,7 +8,7 @@
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<script>
             
-//*************************************FORM ASSIST*********************************************
+//*************************************FORM ASSIST*****************************************
 
 //            forge.internal.call(
 //                                'kill_form_assist.killBar',
@@ -17,8 +17,18 @@
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
             
+//*************************************DATABASE*************************************************
             
-//*************************************DATABASE*********************************************
+            // Test create table
+            forge.internal.call(
+                                'database.createTable',
+                                {queries: "insert into Notes (text,html,server_id,last_updated,sync_status) values ('value1611','value1511','value1411','value1311','value1211')"},
+                                function () { alert('Success!') },
+                                function (e) { alert('Error: '+e.message)}
+                                )
+            
+            
+//*************************************OLD DATABASE*********************************************
             
             // Single insert test
 //            forge.internal.call(
@@ -64,8 +74,7 @@
             
             
             
-            
-            
+//*************************************BOILERPLATE*********************************************
             
 //			forge.internal.addEventListener("alert.resume", function () {
 //				alert("Weclome back!");

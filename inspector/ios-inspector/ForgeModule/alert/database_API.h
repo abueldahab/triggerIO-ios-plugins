@@ -10,6 +10,9 @@
 
 @interface database_API : NSObject
 
+// Creating all the initial tables
++ (void)createTables:(ForgeTask *)task queries:(NSArray *)queryString;
+
 // For reading
 + (void)query:(ForgeTask *)task text:(NSString *)queryString;
 
