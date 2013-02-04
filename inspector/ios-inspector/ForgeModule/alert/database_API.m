@@ -13,10 +13,14 @@
 @implementation database_API
 
 // Takes JSONArray that contains strings to construct the database schema
-+ (void)createTables:(ForgeTask *)task schema:(NSString *)schema {
++ (void)createTables:(ForgeTask *)task schema:(NSArray *)schema {
+
+    NSLog(@"*****************BOOM*************** %@", schema);
     
-    [task error: @"createTables was unable to open/create a database"];
-    [task success: nil];
+    
+    
+//    [task error: @"createTables was unable to open/create a database"];
+//    [task success: nil];
 }
 
 // Returns the JSON array of note objects that match the passed in query.
