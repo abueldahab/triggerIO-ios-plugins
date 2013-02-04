@@ -19,14 +19,15 @@
             
 //*************************************DATABASE********************************************
             
-            // Test create table         
+            // Test create table
             forge.internal.call(
                                 'database.createTables',
                                 {schema: this.CREATE_TABLES},
                                 function () { alert('Success') },
                                 function (e) { alert('Error' + e.message)}
-                                
-            // Create Tables             
+                                )
+
+            // Create Tables
             ({
              CREATE_TABLES: (function() {
                              var COLUMN, CREATE, ENTITY_COLS, LOC_COL, LOC_ID, SCHEMA, SERV_COL, STATUS_COL, TABLE_NAMES, TEXT_COL, TIME_COL, i, schema;
@@ -77,11 +78,11 @@
 //                                )
             
             // database query test
-            forge.internal.call(
-                                'database.query',
-                                {text: "select * from Notes  order by last_updated desc  limit 0,25;"},
-                                function () { alert('Success!') },
-                                function (e) { alert('Error: '+e.message)}
+//            forge.internal.call(
+//                                'database.query',
+//                                {text: "select * from Notes  order by last_updated desc  limit 0,25;"},
+//                                function () { alert('Success!') },
+//                                function (e) { alert('Error: '+e.message)}
 //                                )
             
             
@@ -117,7 +118,7 @@
 //			forge.internal.addEventListener("alert.resume", function () {
 //				alert("Weclome back!");
 //			});
-		
+//		
 //			$(function () {
 //				forge.internal.call('inspector.list', {}, function (methods) {
 //					var modules = {};
@@ -190,7 +191,7 @@
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<h1>INPUT  <small>choose an API call to DOOOIT</small></h1>
+				<h1>INPUT  <small>choose an API call to DOIT</small></h1>
 			</div>
 			<div class="form-horizontal">
 					<div class="control-group">

@@ -6,14 +6,13 @@ def create_all_js(build):
 	
 def platform_specific_templating(build):
 	return [
-		{'when': {'platform_is': 'android', 'module_enabled': 'reload'}, 'do': {'add_element_to_xml': {
-			"file": 'android/ForgeTemplate/res/values/strings.xml',
-			"tag": "item",
-			"text": "io.trigger.forge.android.modules.reload",
-			"to": "string-array/[@name='modules']"
+		{'when': {'platform_is': 'android', 'module_enabled': 'reload'}, 'do': {'add_to_json_array': {
+			"filename": 'android/ForgeTemplate/assets/app_config.json',
+			"key": "modules",
+			"value": "reload"
 		}}},
 		{'when': {'platform_is': 'ios', 'module_enabled': 'reload'}, 'do': {'add_to_json_array': {
-			"filename": 'ios/ForgeTemplate/ForgeTemplate/app_config.json',
+			"filename": 'ios/ForgeTemplate/ForgeTemplate/assets/app_config.json',
 			"key": "modules",
 			"value": "reload"
 		}}},

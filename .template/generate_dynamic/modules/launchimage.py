@@ -53,15 +53,15 @@ def customer_phase(build):
 		
 def platform_specific_templating(build):
 	return [
-		{'when': {'platform_is': 'android', 'have_android_launch': ()}, 'do': {'find_and_replace': {
-			"in": ('android/ForgeTemplate/res/values/strings.xml',),
-			"find": "SPLASH_IMAGE_HERE",
-			"replace": "${modules.launchimage.android}"
+		{'when': {'platform_is': 'android', 'have_android_launch': ()}, 'do': {'set_in_json': {
+			"filename": "android/ForgeTemplate/assets/app_config.json",
+			"key": "splashimage",
+			"value": "${modules.launchimage.android}"
 		}}},
-		{'when': {'platform_is': 'android', 'have_android_launch': ()}, 'do': {'find_and_replace': {
-			"in": ('android/ForgeTemplate/res/values/strings.xml',),
-			"find": "SPLASH_IMAGE_LANDSCAPE_HERE",
-			"replace": "${modules.launchimage['android-landscape']}"
+		{'when': {'platform_is': 'android', 'have_android_launch': ()}, 'do': {'set_in_json': {
+			"filename": "android/ForgeTemplate/assets/app_config.json",
+			"key": "splashimage_landscape",
+			"value": "${modules.launchimage['android-landscape']}"
 		}}},
 		{'when': {'platform_is': 'android',
 			'config_property_exists': 'modules.launchimage.background-color'},

@@ -1,9 +1,11 @@
 {
     "ios": {
         "device": "simulator", 
+        "simulatorsdk": "6.0", 
+        "simulatorfamily": "iphone", 
         "profiles": {
             "DEFAULT": {
-                "provisioning_profile": "/Users/alexhorak/forge-workspace/Trigger_App_Store_01.mobileprovision"
+                "provisioning_profile": "/Users/alexhorak/forge-workspace/Trigger_Ad_Hoc_02.mobileprovision"
             }
         }
     }

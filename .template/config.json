@@ -32,6 +32,7 @@
 		"launchimage": {
 			"android": "img/launch/android_HRP.png", 
 			"android-landscape": "img/launch/android_HRL.png", 
+			"hide-manually": true, 
 			"ipad": "img/launch/iPad_P.png", 
 			"ipad-landscape": "img/launch/iPad_L.png", 
 			"ipad-landscape-retina": "img/launch/ipad_HRL.png", 
@@ -57,7 +58,7 @@
 		"tools": true
 	}, 
 	"name": "Fetchnotes", 
-	"platform_version": "v1.4.24", 
+	"platform_version": "v1.4.29", 
 	"plugins": {
 		"contextmenu": {
 			"hash": "9913ccde26fd85ff45273d9e19bf3c0cfc658ca1"

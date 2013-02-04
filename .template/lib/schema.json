@@ -116,6 +116,14 @@
 									"type": "string"
 								}
 							}, 
+							"exclude_patterns": {
+								"required": false,
+								"type": "array",
+								"description": "Match patterns, defining URLs to not load extension on. (IE only)",
+								"items": {
+									"type": "string"
+								}
+							},
 							"scripts": {
 								"required": true, 
 								"type": "array", 
@@ -223,6 +231,12 @@
 					"required": false,
 					"_docs": "http://docs.trigger.io/en/v1.4/modules/reload.html",
 					"description": "Reload API.",
+					"type": "boolean"
+				},
+				"calendar": {
+					"required": false,
+					"description": "Create calendar events on the users device",
+					"_docs": "http://docs.trigger.io/en/v1.4/modules/calendar.html",
 					"type": "boolean"
 				},
 				"contact": {

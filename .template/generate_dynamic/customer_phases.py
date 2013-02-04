@@ -134,9 +134,10 @@ def include_name():
 	return [
 		{'do': {'populate_xml_safe_name': ()}},
 		{'do': {'populate_json_safe_name': ()}},
-		{'when': {'platform_is': 'android'}, 'do': {'set_element_value_xml': {
-			"file": 'development/android/res/values/strings.xml',
-			"element": "string/[@name='app_name']",
+		{'when': {'platform_is': 'android'}, 'do': {'set_attribute_value_xml': {
+			"file": 'development/android/AndroidManifest.xml',
+			"element": "application",
+			"attribute": "android:label",
 			"value": "${xml_safe_name}"
 		}}},
 		{'when': {'platform_is': 'ios'}, 'do': {'set_in_biplist': {
@@ -180,9 +181,10 @@ def include_uuid():
 			"in": ('development/android/AndroidManifest.xml',),
 			"find": "io.trigger.forge.android.template", "replace": "${modules.package_names.android}"
 		}}},
-		{'when': {'platform_is': 'android'}, 'do': {'find_and_replace': {
-			"in": ('development/android/res/values/strings.xml',),
-			"find": "UUID_HERE", "replace": "${uuid}"
+		{'when': {'platform_is': 'android'}, 'do': {'set_in_json': {
+			"filename": "development/android/assets/app_config.json",
+			"key": "uuid",
+			"value": "${uuid}"
 		}}},
 		{'when': {'platform_is': 'wp'}, 'do': {'find_and_replace': {
 			"in": ('development/wp/Properties/manifest.json',),
@@ -201,7 +203,11 @@ def include_uuid():
 			"key": "CFBundleIdentifier", "value": "${modules.package_names.ios}"
 		}}},
 		{'when': {'platform_is': 'ios'}, 'do': {'find_and_replace': {
-			"in": ( 'development/ios/*/app_config.json',),
+			"in": ( 'development/ios/device-ios.app/assets/app_config.json',),
+			"find": "UUID_HERE", "replace": "${uuid}"
+		}}},
+		{'when': {'platform_is': 'ios'}, 'do': {'find_and_replace': {
+			"in": ( 'development/ios/simulator-ios.app/assets/app_config.json',),
 			"find": "UUID_HERE", "replace": "${uuid}"
 		}}},
 		{'when': {'platform_is': 'ie'}, 'do': {'find_and_replace': {
@@ -293,13 +299,15 @@ def include_version():
 def include_reload():
 	return [
 		{'do': {'populate_trigger_domain': ()}},
-		{'when': {'platform_is': 'android'}, 'do': {'find_and_replace': {
-			"in": ('development/android/res/values/strings.xml',),
-			"find": "CONFIG_HASH_HERE", "replace": "${config_hash}"
+		{'when': {'platform_is': 'android'}, 'do': {'set_in_json': {
+			"filename": "development/android/assets/app_config.json",
+			"key": "config_hash",
+			"value": "${config_hash}"
 		}}},
-		{'when': {'platform_is': 'android'}, 'do': {'find_and_replace': {
-			"in": ('development/android/res/values/strings.xml',),
-			"find": "TRIGGER_DOMAIN_HERE", "replace": "${trigger_domain}"
+		{'when': {'platform_is': 'android'}, 'do': {'set_in_json': {
+			"filename": "development/android/assets/app_config.json",
+			"key": "trigger_domain",
+			"value": "${trigger_domain}"
 		}}},
 		{'when': {'platform_is': 'wp'}, 'do': {'find_and_replace': {
 			"in": ('development/wp/Properties/manifest.json',),
@@ -314,11 +322,19 @@ def include_reload():
 			"find": "VERSION_CODE_HERE", "replace": str(int(timegm(gmtime())))
 		}}},
 		{'when': {'platform_is': 'ios'}, 'do': {'find_and_replace': {
-			"in": ('development/ios/*/app_config.json',),
+			"in": ('development/ios/device-ios.app/assets/app_config.json',),
 			"find": "CONFIG_HASH_HERE", "replace": "${config_hash}"
 		}}},
 		{'when': {'platform_is': 'ios'}, 'do': {'find_and_replace': {
-			"in": ('development/ios/*/app_config.json',),
+			"in": ('development/ios/simulator-ios.app/assets/app_config.json',),
+			"find": "CONFIG_HASH_HERE", "replace": "${config_hash}"
+		}}},
+		{'when': {'platform_is': 'ios'}, 'do': {'find_and_replace': {
+			"in": ('development/ios/device-ios.app/assets/app_config.json',),
+			"find": "TRIGGER_DOMAIN_HERE", "replace": "${trigger_domain}"
+		}}},
+		{'when': {'platform_is': 'ios'}, 'do': {'find_and_replace': {
+			"in": ('development/ios/simulator-ios.app/assets/app_config.json',),
 			"find": "TRIGGER_DOMAIN_HERE", "replace": "${trigger_domain}"
 		}}},
 	]
