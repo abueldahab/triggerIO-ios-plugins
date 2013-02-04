@@ -3,7 +3,7 @@
 //  ForgeModule
 //
 //  Created by explhorak on 12/17/12.
-//  Copyright (c) 2012 Trigger Corp. All rights reserved.
+//  Fetchnotes
 //
 
 #import "database_API.h"
@@ -14,9 +14,20 @@
 
 // Takes JSONArray that contains strings to construct the database schema
 + (void)createTables:(ForgeTask *)task schema:(NSArray *)schema {
-
-    NSLog(@"*****************BOOM*************** %@", schema);
     
+    // Locate Documents directory and open database.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    // Iterate through the array and create a table with each name and then run the query
+    for(id item in schema)
+    {
+        NSLog(@"Found an Item: %@",item);
+        
+    }
     
     
 //    [task error: @"createTables was unable to open/create a database"];
