@@ -80,6 +80,8 @@
 // CUD notes based on given query.
 // Basic CUD query that returns the note id(s) of the CUDed note.
 // Can also handle array of queries and returns array of ints
+
+// Takes array of JSON objects with one attribute called query (string), and args (array of strings - only ever be of length 1)) 
 + (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings {
     
     // Locate Documents directory and open database.
