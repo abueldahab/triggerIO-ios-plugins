@@ -49,6 +49,10 @@
     NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     
+    if (![database open]) {
+        [task error: @"ERROR: createTables() was unable to open or create a database."];
+    }
+    
     [database open];
     
     // Iterate through the array and drop each table
