@@ -106,7 +106,7 @@
             // WriteAll takes an array of JSON objects with one attribute called query and
             forge.internal.call(
                                 'database.writeAll',
-                                {queries: [query:"insert into Notes (text) values (?)", text:"woot3"]},
+                                {queries: [ {query:"insert into Notes (text) values (?)", args: [ "woot3" ] } ] },
                                 function () { alert('Success') },
                                 function (e) { alert('Error' + e.message)}
                                 )
