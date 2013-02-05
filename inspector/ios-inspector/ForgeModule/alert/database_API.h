@@ -16,6 +16,9 @@
 // Drop all the tables
 + (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables;
 
+// Takes array of JSON objects with one attribute called query (string), and args (array of strings - only ever be of length 1))
++ (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings;
+
 // For writing
 + (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings;
 
