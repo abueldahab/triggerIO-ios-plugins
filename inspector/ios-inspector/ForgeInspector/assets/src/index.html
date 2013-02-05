@@ -61,14 +61,12 @@
 //            )
             
             // Wipe
-            forge.internal.call(
-                                'database.dropTables',
-                                {tables: ["Notes", "NoteTags", "NoteContacts", "NoteURL", "NoteEmail"]},
-                                function () { alert('Success')},
-                                function (e) { alert('Error' + e.message)}
-                                )
-       
-            
+//            forge.internal.call(
+//                                'database.dropTables',
+//                                {tables: ["Notes", "NoteTags", "NoteContacts", "NoteURL", "NoteEmail"]},
+//                                function () { alert('Success')},
+//                                function (e) { alert('Error' + e.message)}
+//                                )
 
             // Create Tables
             var CREATE_TABLES = (function() {
@@ -106,12 +104,12 @@
                                  })()
             
             // Test create table
-//            forge.internal.call(
-//                                'database.createTables',
-//                                {schema: CREATE_TABLES},
-//                                function () { alert('Success') },
-//                                function (e) { alert('Error' + e.message)}
-//                                )
+            forge.internal.call(
+                                'database.createTables',
+                                {schema: CREATE_TABLES},
+                                function () { alert('Success') },
+                                function (e) { alert('Error' + e.message)}
+                                )
             
 //*************************************OLD DATABASE*********************************************
             

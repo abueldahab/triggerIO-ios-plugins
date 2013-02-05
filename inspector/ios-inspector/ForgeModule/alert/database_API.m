@@ -21,6 +21,10 @@
     NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     
+    if (![database open]) {
+        [task error: @"ERROR: createTables() was unable to open or create a database."];
+    }
+    
     [database open];
     
     // Iterate through the array and create a table with each name and then run the query
@@ -34,7 +38,6 @@
     
     [database close];
     
-//    [task error: @"createTables was unable to open/create a database"];
     [task success: nil];
 }
 
@@ -58,6 +61,37 @@
     [database close];
     
     [task success: nil];
+}
+
+// CUD notes based on given query.
+// Basic CUD query that returns the note id(s) of the CUDed note.
+// Can also handle array of queries and returns array of ints
+
+// Takes array of JSON objects with one attribute called query (string), and args (array of strings - only ever be of length 1)) 
++ (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings {
+    
+    // Locate Documents directory and open database.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    // Iterate through each query and excuteUpdate()
+    // Wrap int into a NSNumber to add to NSMutableArray
+    NSInteger count = [queryStrings count];
+    NSMutableArray *rowIds = [[NSMutableArray alloc] init];
+    int lastInsertRowId = 0;
+    for (int i = 0; i < count; i++) {
+        [database executeUpdate:queryStrings[i]];
+        lastInsertRowId = [database lastInsertRowId];
+        NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
+        [rowIds addObject:lastInsertRowIdInteger];
+    }
+    
+    [database close];
+    NSLog(@"*******Array*of*last*objects*added****** %@", rowIds);
+    [task success: rowIds];
 }
 
 // Returns the JSON array of note objects that match the passed in query.
@@ -97,37 +131,6 @@
     //    NSLog(@"********Array*of*notes*******: %@", resultsArray);
     
     [task success:resultsArrayImutable]; //JSONArray of JSON objects
-}
-
-// CUD notes based on given query.
-// Basic CUD query that returns the note id(s) of the CUDed note.
-// Can also handle array of queries and returns array of ints
-
-// Takes array of JSON objects with one attribute called query (string), and args (array of strings - only ever be of length 1)) 
-+ (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings {
-    
-    // Locate Documents directory and open database.
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
-    FMDatabase *database = [FMDatabase databaseWithPath:path];
-    [database open];
-    
-    // Iterate through each query and excuteUpdate()
-    // Wrap int into a NSNumber to add to NSMutableArray
-    NSInteger count = [queryStrings count];
-    NSMutableArray *rowIds = [[NSMutableArray alloc] init];
-    int lastInsertRowId = 0;
-    for (int i = 0; i < count; i++) {
-        [database executeUpdate:queryStrings[i]];
-        lastInsertRowId = [database lastInsertRowId];
-        NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
-        [rowIds addObject:lastInsertRowIdInteger];
-    }
-    
-    [database close];
-    NSLog(@"*******Array*of*last*objects*added****** %@", rowIds);
-    [task success: rowIds];
 }
 
 // Takes a stringQuery as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings of that type
