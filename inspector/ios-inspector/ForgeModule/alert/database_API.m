@@ -38,6 +38,28 @@
     [task success: nil];
 }
 
+// Just drops all the tables in database, given an array of tables 
++ (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables {
+    // Locate Documents directory and open database.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    
+    [database open];
+    
+    // Iterate through the array and drop each table
+    for (id item in tables) {
+        NSString * query = [NSString stringWithFormat:@"DROP TABLE %@", item];
+        [database executeUpdate:query];
+        NSLog(@"database.sql: %@", query);
+    }
+
+    [database close];
+    
+    [task success: nil];
+}
+
 // Returns the JSON array of note objects that match the passed in query.
 + (void)query:(ForgeTask *)task text:(NSString *)queryString {
     

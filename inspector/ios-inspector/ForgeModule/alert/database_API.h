@@ -13,11 +13,14 @@
 // Creating all the initial tables
 + (void)createTables:(ForgeTask *)task schema:(NSArray *)schema;
 
-// For reading
-+ (void)query:(ForgeTask *)task text:(NSString *)queryString;
+// Drop all the tables
++ (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables;
 
 // For writing
 + (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings;
+
+// For reading
++ (void)query:(ForgeTask *)task text:(NSString *)queryString;
 
 // For CUDing entities such as #s and @s
 + (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType;
