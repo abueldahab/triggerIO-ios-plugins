@@ -119,8 +119,6 @@ int main (int argc, const char * argv[]) {
     
     
     
-    
-    
     FMResultSet *rs = [db executeQuery:@"select rowid,* from test where a = ?", @"hi'"];
     while ([rs next]) {
         // just print out what we've got in a number of formats.

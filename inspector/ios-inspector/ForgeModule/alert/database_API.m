@@ -20,18 +20,22 @@
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:path];
+    
     [database open];
     
     // Iterate through the array and create a table with each name and then run the query
-    for(id item in schema)
-    {
-        NSLog(@"Found an Item: %@",item);
-        
+    for (NSDictionary * dataDict in schema) {
+        NSString * NAME = [dataDict objectForKey:@"name"];
+        NSString * SCHEMA = [dataDict objectForKey:@"schema"];
+        NSString * QUERY = [NSString stringWithFormat:@"CREATE TABLE %@ %@", NAME, SCHEMA];
+        [database executeUpdate:QUERY];
+        NSLog(@"database.sql: %@", QUERY);
     }
     
+    [database close];
     
 //    [task error: @"createTables was unable to open/create a database"];
-//    [task success: nil];
+    [task success: nil];
 }
 
 // Returns the JSON array of note objects that match the passed in query.
