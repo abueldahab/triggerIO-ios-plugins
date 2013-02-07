@@ -124,19 +124,16 @@
     }
     [database close];
     
-    //Convert NSMutableArray into NSArray or NSDictionary/NSNumber/NSString
-    NSArray *resultsArrayImutable = [[NSArray alloc] initWithArray:resultsArray];
-    
     // Serialize array data into a JSON object.
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:resultsArray
                                                         options:kNilOptions
                                                           error:nil];
     
-    // Logging out the finalized, stringified key value pairs
+    // JSONArray of JSON objects
     NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
     NSLog(@"database.sql: %@", strData);
     
-    [task success:JSONData]; //JSONArray of JSON objects
+    [task success:JSONData];
 }
 
 
