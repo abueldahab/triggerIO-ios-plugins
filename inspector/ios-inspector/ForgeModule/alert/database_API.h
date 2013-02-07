@@ -10,19 +10,16 @@
 
 @interface database_API : NSObject
 
-// Creating all the initial tables
+// Takes JSONArray that contains strings to construct the database schema
 + (void)createTables:(ForgeTask *)task schema:(NSArray *)schema;
-
-// Drop all the tables
-+ (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables;
 
 // Takes array of JSON objects with one attribute called query (string), and args (array of strings - only ever be of length 1))
 + (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings;
 
-// For reading
+// Returns the JSON array of note objects that match the passed in query.
 + (void)query:(ForgeTask *)task query:(NSString *)query;
 
-// For CUDing entities such as #s and @s
-+ (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType;
+// Just drops all the tables in database, given an array of tables
++ (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables;
 
 @end
