@@ -60,17 +60,15 @@
     
     [database open];
     
-    NSLog(@"hellopoo: %@", queryStrings);
-    
-//    for (NSDictionary * dataDict in queryStrings) {
-//        NSString * ARGS = [dataDict objectForKey:@"args"];
-//        NSString * QUERY = [dataDict objectForKey:@"query"];
-//        NSLog(@"ARGS: %@", ARGS);
-//        NSLog(@"QUERY: %@", QUERY);
-//        NSString * QUERY = [NSString stringWithFormat:@"CREATE TABLE %@ %@", NAME, SCHEMA];
-//        [database executeUpdate:QUERY];
-//        NSLog(@"database.sql: %@", QUERY);
-//    }
+    for (NSDictionary * dataDict in queryStrings) {
+        NSArray *args = [dataDict objectForKey:@"args"];
+        NSString *query = [dataDict objectForKey:@"query"];
+        
+        for (id item in args) {
+            [database executeUpdate:query withArgumentsInArray:args];
+            NSLog(@"database.sql: %@ with args: %@", query, item);
+        }
+    }
     
     [database close];
 
