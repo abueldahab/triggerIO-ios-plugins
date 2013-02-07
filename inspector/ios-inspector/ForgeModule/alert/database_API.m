@@ -41,9 +41,6 @@
     [task success: nil];
 }
 
-// CUD notes based on given query.
-// Basic CUD query that returns the note id(s) of the CUDed note.
-// Can also handle array of queries and returns array of ints
 
 // Takes array of JSON objects with one attribute called query (string), and args (array of strings - only ever be of length 1))
 + (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings {
@@ -75,6 +72,7 @@
     [task success: nil];
 }
 
+
 // Just drops all the tables in database, given an array of tables 
 + (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables {
     // Locate Documents directory and open database.
@@ -101,11 +99,12 @@
     [task success: nil];
 }
 
+
 // Returns the JSON array of note objects that match the passed in query.
-+ (void)query:(ForgeTask *)task text:(NSString *)queryString {
++ (void)query:(ForgeTask *)task query:(NSString *)query {
     
     // Error handling.
-    if ([queryString length] == 0) {
+    if ([query length] == 0) {
         [task error: @"Query is 0 characters long"];
         return;
     }
@@ -119,7 +118,7 @@
     
     // Pop all query results into an NSMutableArray & close database.
     NSMutableArray *resultsArray = [NSMutableArray array];
-    FMResultSet *resultsSet = [database executeQuery:queryString];
+    FMResultSet *resultsSet = [database executeQuery:query];
     while ([resultsSet next]) {
         [resultsArray addObject:[resultsSet resultDictionary]];
     }
@@ -129,16 +128,18 @@
     NSArray *resultsArrayImutable = [[NSArray alloc] initWithArray:resultsArray];
     
     // Serialize array data into a JSON object.
-    //    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:resultsArray
-    //                                                        options:kNilOptions
-    //                                                          error:nil];
+    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:resultsArray
+                                                        options:kNilOptions
+                                                          error:nil];
     
     // Logging out the finalized, stringified key value pairs
-    //    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-    //    NSLog(@"********Array*of*notes*******: %@", resultsArray);
+    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
+    NSLog(@"database.sql: %@", strData);
     
-    [task success:resultsArrayImutable]; //JSONArray of JSON objects
+    [task success:JSONData]; //JSONArray of JSON objects
 }
+
+
 
 // Takes a stringQuery as well as query type (either 'tag' or 'contact') & passes back a JSON array of strings of that type
 + (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType {

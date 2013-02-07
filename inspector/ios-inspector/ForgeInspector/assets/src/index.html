@@ -104,17 +104,29 @@
 //                                )
             
             // WriteAll takes an array of JSON objects with one attribute called query and
+//            forge.internal.call(
+//                                'database.writeAll',
+//                                {queries: [
+//                                            {query:"insert into Notes (text) values (?)", args:["papi1"]},
+//                                            {query:"insert into Notes (text) values (?)", args:["papi2"]},
+//                                            {query:"insert into Notes (text) values (?)", args:["papi3"]}
+//                                          ]
+//                                },
+//                                function () { alert('Success')},
+//                                function (e) { alert('Error' + e.message)}
+//                                )
+            
+            // Test create table
             forge.internal.call(
-                                'database.writeAll',
-                                {queries: [
-                                            {query:"insert into Notes (text) values (?)", args:["papi1"]},
-                                            {query:"insert into Notes (text) values (?)", args:["papi2"]},
-                                            {query:"insert into Notes (text) values (?)", args:["papi3"]}
-                                          ]
+                                'database.query',
+                                {query: "select * from Notes order by last_updated desc limit 0,25;"},
+                                function (results) {
+                                    console.log("POOOOOP: " + results);
+                                    alert('Success');
                                 },
-                                function () { alert('Success')},
                                 function (e) { alert('Error' + e.message)}
                                 )
+            
             
             // Drop all the tables
 //            forge.internal.call(

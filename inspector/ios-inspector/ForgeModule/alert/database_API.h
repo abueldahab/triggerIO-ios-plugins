@@ -19,11 +19,8 @@
 // Takes array of JSON objects with one attribute called query (string), and args (array of strings - only ever be of length 1))
 + (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings;
 
-// For writing
-+ (void)writeAll:(ForgeTask *)task queries:(NSArray *)queryStrings;
-
 // For reading
-+ (void)query:(ForgeTask *)task text:(NSString *)queryString;
++ (void)query:(ForgeTask *)task query:(NSString *)query;
 
 // For CUDing entities such as #s and @s
 + (void)entityQuery:(ForgeTask *)task text:(NSString *)queryString type:(NSString *)queryType;
