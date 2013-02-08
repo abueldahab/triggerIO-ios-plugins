@@ -77,7 +77,7 @@
     
     // Error handling.
     if ([query length] == 0) {
-        [task error: @"Query is 0 characters long"];
+        [task error: @"Error: Query is 0 characters long"];
         return;
     }
     
@@ -86,7 +86,6 @@
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:path];
-    [database open];
     
     // Pop all query results into an NSMutableArray & close database.
     NSMutableArray *resultsArray = [NSMutableArray array];
@@ -107,7 +106,6 @@
     
     [task success:JSONData];
 }
-
 
 // Just drops all the tables in database, given an array of tables 
 + (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables {

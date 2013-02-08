@@ -96,12 +96,12 @@
                                  })()
             
             // Test create table
-//            forge.internal.call(
-//                                'database.createTables',
-//                                {schema: CREATE_TABLES},
-//                                function () { alert('Success') },
-//                                function (e) { alert('Error' + e.message)}
-//                                )
+            forge.internal.call(
+                                'database.createTables',
+                                {schema: CREATE_TABLES},
+                                function () { alert('Success') },
+                                function (e) { alert('Error' + e.message)}
+                                )
             
             // WriteAll takes an array of JSON objects with one attribute called query and
 //            forge.internal.call(
@@ -117,15 +117,14 @@
 //                                )
             
             // Test create table
-            forge.internal.call(
-                                'database.query',
-                                {query: "select * from Notes order by last_updated desc limit 0,25;"},
-                                function (results) {
-                                    console.log("POOOOOP: " + results);
-                                    alert('Success');
-                                },
-                                function (e) { alert('Error' + e.message)}
-                                )
+//            forge.internal.call(
+//                                'database.query',
+//                                {query: "select * from Notes order by last_updated desc limit 0,25;"},
+//                                function (results) {
+//                                    alert('Success');
+//                                },
+//                                function (e) { alert('Error' + e.message)}
+//                                )
             
             
             // Drop all the tables
