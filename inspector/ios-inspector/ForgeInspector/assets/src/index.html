@@ -7,7 +7,7 @@
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<script>
-            
+
 //*************************************FORM ASSIST*****************************************
 
 //            forge.internal.call(
@@ -16,49 +16,8 @@
 //                                function () { alert('Success!') },
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
-            
-//*************************************DATABASE********************************************
-            
-//            var callAsync = function (toCalls) {
-//                if(toCalls.length){
-//                    toCall = toCalls[0];
-//                    forge.internal.call('database.'+toCall.string,
-//                                        toCall.args,
-//                                        function(success){
-//                                        toCall.success(success);
-//                                        callAsync(toCalls.slice(1));
-//                                        },toCall.error)
-//                }
-//            }
-//            
-//            callAsync([
-//                {
-//                       string: 'createTables',
-//                       args: {schema:[
-//                                      {name:"Poo", schema: "(identification INTEGER PRIMARY KEY, poop TEXT)"},
-//                                      {name: "Woot", schema: "(wootLevel INTEGER, wootName TEXT, age TEXT)"}
-//                                      ]},
-//                       success: function(){alert("Yay created tables");}
-//                       },
-//                       {
-//                       string: 'writeAll',
-//                       args: {queries:[
-//                                       {query:"insert into Poo (poop) values (?)", text:"wooot woo"}//,
-//                                       //{query:"insert into Woot (wootLevel, wootName, age) values (69, ?, 'old')", text: "wooty"}
-//                                       ]},
-//                       success: function(ids){alert(ids);}
-//                       },
-//                       {
-//                       string: 'wipe',
-//                       args:{},
-//                       success: function(){alert("yay dropped tables");},
-//                       error: function(e){
-//                       alert("Shit an error");
-//                       console.log(e);
-//                       }
-//                }
-//            ]
-//            )
+
+//*************************************DATABASE V2********************************************
 
             // Create Tables
             var CREATE_TABLES = (function() {
@@ -94,28 +53,53 @@
                                          return _results;
                                          })();
                                  })()
-            
+
             // Test create table
+//            forge.internal.call(
+//                                'database.createTables',
+//                                {schema: CREATE_TABLES},
+//                                function () { alert('Success') },
+//                                function (e) { alert('Error' + e.message)}
+//                                )
+
+            // WriteAll takes an array of JSON objects with one attribute called query and
             forge.internal.call(
-                                'database.createTables',
-                                {schema: CREATE_TABLES},
-                                function () { alert('Success') },
+                                'database.writeAll',
+                                {queries: [
+                                            {query:"insert into Notes (text) values (?)", args:["papi1"]},
+                                            {query:"insert into Notes (text) values (?)", args:["papi2"]},
+                                            {query:"insert into Notes (text) values (?)", args:["papi3"]}
+                                          ]
+                                },
+                                function () { alert('Success')},
                                 function (e) { alert('Error' + e.message)}
                                 )
             
-            // WriteAll takes an array of JSON objects with one attribute called query and
-//            forge.internal.call(
-//                                'database.writeAll',
-//                                {queries: [
-//                                            {query:"insert into Notes (text) values (?)", args:["papi1"]},
-//                                            {query:"insert into Notes (text) values (?)", args:["papi2"]},
-//                                            {query:"insert into Notes (text) values (?)", args:["papi3"]}
-//                                          ]
-//                                },
-//                                function () { alert('Success')},
-//                                function (e) { alert('Error' + e.message)}
-//                                )
-            
+            forge.internal.call(
+                                'database.writeAll',
+                                {queries: [
+                                           {query:"insert into Notes (text) values (?)", args:["papi1"]},
+                                           {query:"insert into Notes (text) values (?)", args:["papi2"]},
+                                           {query:"insert into Notes (text) values (?)", args:["papi3"]}
+                                           ]
+                                },
+                                function () { alert('Success')},
+                                function (e) { alert('Error' + e.message)}
+                                )
+
+            forge.internal.call(
+                                'database.writeAll',
+                                {queries: [
+                                           {query:"insert into Notes (text) values (?)", args:["papi1"]},
+                                           {query:"insert into Notes (text) values (?)", args:["papi2"]},
+                                           {query:"insert into Notes (text) values (?)", args:["papi3"]}
+                                           ]
+                                },
+                                function () { alert('Success')},
+                                function (e) { alert('Error' + e.message)}
+                                )
+
+
             // Test create table
 //            forge.internal.call(
 //                                'database.query',
@@ -125,18 +109,18 @@
 //                                },
 //                                function (e) { alert('Error' + e.message)}
 //                                )
-            
-            
+
+
             // Drop all the tables
-//            forge.internal.call(
-//                                'database.dropTables',
-//                                {tables: ["Notes", "NoteTags", "NoteContacts", "NoteURL", "NoteEmail"]},
-//                                function () { alert('Success')},
-//                                function (e) { alert('Error' + e.message)}
-//                                )
-            
+//           forge.internal.call(
+//                               'database.dropTables',
+//                               {tables: ["Notes", "NoteTags", "NoteContacts", "NoteURL", "NoteEmail"]},
+//                               function () { alert('Success')},
+//                               function (e) { alert('Error' + e.message)}
+//                               )
+
 //*************************************OLD DATABASE*********************************************
-            
+
             // Single insert test
 //            forge.internal.call(
 //                                'database.writeAll',
@@ -144,7 +128,7 @@
 //                                function () { alert('Success!') },
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
-            
+
             // database query test
 //            forge.internal.call(
 //                                'database.query',
@@ -152,8 +136,8 @@
 //                                function () { alert('Success!') },
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
-            
-            
+
+
 //            // Multiple insert test
 //            forge.internal.call(
 //                                'database.writeAll',
@@ -169,8 +153,8 @@
 //                                function () { alert('Success!') },
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
-            
-            
+
+
             // Multiple inserts per single query - doesn't need to support
 //            forge.internal.call(
 //                                'database.cudQuery',
@@ -178,15 +162,15 @@
 //                                function () { alert('Success!') },
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
-            
-            
-            
+
+
+
 //*************************************BOILERPLATE*********************************************
-            
+
 //			forge.internal.addEventListener("alert.resume", function () {
 //				alert("Weclome back!");
 //			});
-//		
+//
 //			$(function () {
 //				forge.internal.call('inspector.list', {}, function (methods) {
 //					var modules = {};
@@ -203,7 +187,7 @@
 //						$('#_module').append('<option>'+module+'</option>');
 //					}
 //					$('#_module').change(function () {
-//						var methods = modules[$(this).val()]; 
+//						var methods = modules[$(this).val()];
 //						$('#_method').html('');
 //						for (method in methods) {
 //							$('#_method').append('<option>'+method+'</option>');
@@ -213,7 +197,7 @@
 //					$('#_module').change();
 //					$('#_method').change(function () {
 //						var module = $('#_module').val();
-//						var method = $(this).val(); 
+//						var method = $(this).val();
 //						var params = modules[module][method];
 //						$('.api_input').detach();
 //						for (param in params) {
@@ -225,11 +209,11 @@
 //						var module = $('#_module').val();
 //						var method = $('#_method').val();
 //						var params = {};
-//						
+//
 //						$('.api_input input').each(function (i, x) {
 //							params[$(x).attr('id')] = $(x).val();
 //						});
-//						
+//
 //						$('#_output').prepend('<pre class="alert alert-info">Called "'+module+'.'+method+'" with "'+JSON.stringify(params, null, '')+'"</pre>');
 //						forge.internal.call(module+'.'+method, params, function () {
 //							$('#_output').prepend('<pre class="alert alert-success">Success for "'+module+'.'+method+'" with "'+JSON.stringify(arguments[0], null, '')+'"</pre>');
