@@ -54,24 +54,6 @@
     }
     [database open];
     
-    // Iterate through each query and excuteUpdate()
-    // Wrap int into a NSNumber to add to NSMutableArray
-//    NSInteger count = [queryStrings count];
-//    NSMutableArray *rowIds = [[NSMutableArray alloc] init];
-//    int lastInsertRowId = 0;
-//    for (int i = 0; i < count; i++) {
-//        [database executeUpdate:queryStrings[i]];
-//        lastInsertRowId = [database lastInsertRowId];
-//        NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
-//        [rowIds addObject:lastInsertRowIdInteger];
-//    }
-//    
-//    [database close];
-//    NSLog(@"database.sql: %@", rowIds);
-//    [task success: rowIds];
-    
-    //------------------------------------------------------------
-    
     NSMutableArray *rowIds = [[NSMutableArray alloc] init];
     int lastInsertRowId = 0;
     
@@ -94,8 +76,6 @@
     
     // JSONArray of JSON objects
     NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-
-    
     
     NSLog(@"database.sql: %@", strData);
     [task success: strData];
