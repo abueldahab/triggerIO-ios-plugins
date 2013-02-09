@@ -24,7 +24,6 @@
     if (![database open]) {
         [task error: @"ERROR: createTables() was unable to open or create a database."];
     }
-    
     [database open];
     
     // Iterate through the array and create a table with each name and then run the query
@@ -53,22 +52,53 @@
     if (![database open]) {
         [task error: @"ERROR: createTables() was unable to open or create a database."];
     }
-    
     [database open];
     
-    for (NSDictionary * dataDict in queryStrings) {
-        NSArray *args = [dataDict objectForKey:@"args"];
+    // Iterate through each query and excuteUpdate()
+    // Wrap int into a NSNumber to add to NSMutableArray
+//    NSInteger count = [queryStrings count];
+//    NSMutableArray *rowIds = [[NSMutableArray alloc] init];
+//    int lastInsertRowId = 0;
+//    for (int i = 0; i < count; i++) {
+//        [database executeUpdate:queryStrings[i]];
+//        lastInsertRowId = [database lastInsertRowId];
+//        NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
+//        [rowIds addObject:lastInsertRowIdInteger];
+//    }
+//    
+//    [database close];
+//    NSLog(@"database.sql: %@", rowIds);
+//    [task success: rowIds];
+    
+    //------------------------------------------------------------
+    
+    NSMutableArray *rowIds = [[NSMutableArray alloc] init];
+    int lastInsertRowId = 0;
+    
+    for (NSDictionary *dataDict in queryStrings) {
+        NSMutableArray *args = [dataDict objectForKey:@"args"];
         NSString *query = [dataDict objectForKey:@"query"];
-        
         for (id item in args) {
             [database executeUpdate:query withArgumentsInArray:args];
-            NSLog(@"database.sql: %@ with args: %@", query, item);
+            lastInsertRowId = [database lastInsertRowId];
+            NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
+            [rowIds addObject:lastInsertRowIdInteger];
         }
     }
-    
     [database close];
+    
+    // Serialize array data into a JSON object.
+    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:rowIds
+                                                       options:kNilOptions
+                                                         error:nil];
+    
+    // JSONArray of JSON objects
+    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
 
-    [task success: nil];
+    
+    
+    NSLog(@"database.sql: %@", strData);
+    [task success: strData];
 }
 
 
