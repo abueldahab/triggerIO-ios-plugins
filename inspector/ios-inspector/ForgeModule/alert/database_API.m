@@ -60,13 +60,12 @@
     for (NSDictionary *dataDict in queryStrings) {
         NSMutableArray *args = [dataDict objectForKey:@"args"];
         NSString *query = [dataDict objectForKey:@"query"];
-        for (id item in args) {
-            [database executeUpdate:query withArgumentsInArray:args];
-            lastInsertRowId = [database lastInsertRowId];
-            NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
-            [rowIds addObject:lastInsertRowIdInteger];
-        }
+        [database executeUpdate:query withArgumentsInArray:args];
+        lastInsertRowId = [database lastInsertRowId];
+        NSNumber *lastInsertRowIdInteger = [[NSNumber alloc] initWithInt:lastInsertRowId];
+        [rowIds addObject:lastInsertRowIdInteger];
     }
+    
     [database close];
     
     // Serialize array data into a JSON object.
@@ -78,7 +77,7 @@
     NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
     
     NSLog(@"database.sql: %@", strData);
-    [task success: strData];
+    [task success: rowIds];
 }
 
 
@@ -96,6 +95,7 @@
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
     
     // Pop all query results into an NSMutableArray & close database.
     NSMutableArray *resultsArray = [NSMutableArray array];
@@ -114,7 +114,7 @@
     NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
     NSLog(@"database.sql: %@", strData);
     
-    [task success:JSONData];
+    [task success:resultsArray];
 }
 
 // Just drops all the tables in database, given an array of tables 
