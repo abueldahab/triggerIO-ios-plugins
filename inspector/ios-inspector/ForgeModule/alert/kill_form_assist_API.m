@@ -19,7 +19,7 @@
             if (![[testWindow class] isEqual:[UIWindow class]]) {
                 keyboardWindow = testWindow;
             }
-        }
+        }   
         
         // Locate UIWebFormViedw.
         for (UIView *possibleFormView in [keyboardWindow subviews]) {
