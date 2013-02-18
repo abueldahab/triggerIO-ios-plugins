@@ -92,26 +92,30 @@
     
     NSMutableArray *multiQueryResultsArray = [NSMutableArray array];
     NSMutableArray *queryResultsArray = [NSMutableArray array];
+    
     for (id query in queries) {
         FMResultSet *resultsSet = [database executeQuery:query];
+        NSLog(@"hitting");
         while ([resultsSet next]) {
             [queryResultsArray addObject:[resultsSet resultDictionary]];
+            NSLog(@"Adding query result to queryResultsArray %@", queryResultsArray);
         }
-        [multiQueryResultsArray addObject: queryResultsArray];
+        //clear queryResults for the next query
+        [queryResultsArray removeAllObjects];
     }
     [database close];
-    // Serialize array data into a JSON object.
-    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:multiQueryResultsArray
-                                                       options:kNilOptions
-                                                         error:nil];
     
-    // JSONArray of JSON objects
-    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-    NSLog(@"database.sql: %@", strData);
+    
+    // Serialize array data into a JSON object.
+//    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:multiQueryResultsArray
+//                                                       options:kNilOptions
+//                                                         error:nil];
+//    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
+//    NSLog(@"database.sql: %@", strData);
 
 //    NSLog(@"Results array: %@", multiQueryResultsArray);
     
-    [task success:multiQueryResultsArray];
+//    [task success:multiQueryResultsArray];
 }
 
 
