@@ -20,6 +20,15 @@
 //                                function (e) { alert('Error: '+e.message)}
 //                                )
             
+            forge.internal.call('database.multiQuery',
+                                {
+                                queries: [
+                                          "select * from Notes where id='lolsecksi'",
+                                          "select * from Notes where id='fosidfjoai'"
+                                          ]
+                                }
+                                )
+            
             
             
             
@@ -428,6 +437,14 @@
 //
 //					});
 //					}
+//            
+//        forge.internal.call('database.multiQuery',
+//                            {
+//                            queries: [
+//                                      "select * from Notes where id='poopshit'",
+//                                      "select * from Notes where id='fosidfjoai'"
+//                                      ]
+//                            }
 //
 //		forge.internal.call('database.dropTables', {
 //				tables: window.tables.map(

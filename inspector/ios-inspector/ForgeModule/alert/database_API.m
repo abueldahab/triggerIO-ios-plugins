@@ -82,6 +82,24 @@
 
 // Selecting multipel single notes by ID's and
 + (void)multiQuery:(ForgeTask *)task query:(NSString *)query {
+    // Error handling.
+    if ([query length] == 0) {
+        [task error: @"Error: Query is 0 characters long"];
+        return;
+    }
+    
+    // Locate Documents directory and open database.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSMutableArray *resultsArray = [NSMutableArray array];
+    
+    NSLog(@"Results array: %@", resultsArray);
+
+    
     
 }
 
@@ -107,7 +125,7 @@
     FMResultSet *resultsSet = [database executeQuery:query];
     while ([resultsSet next]) {
         [resultsArray addObject:[resultsSet resultDictionary]];
-    }
+    }   
     [database close];
     
     // Serialize array data into a JSON object.
