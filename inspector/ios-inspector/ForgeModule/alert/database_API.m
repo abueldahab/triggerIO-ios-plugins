@@ -99,6 +99,15 @@
         }
         [multiQueryResultsArray addObject: queryResultsArray];
     }
+    [database close];
+    // Serialize array data into a JSON object.
+    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:multiQueryResultsArray
+                                                       options:kNilOptions
+                                                         error:nil];
+    
+    // JSONArray of JSON objects
+    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
+    NSLog(@"database.sql: %@", strData);
 
 //    NSLog(@"Results array: %@", multiQueryResultsArray);
     
