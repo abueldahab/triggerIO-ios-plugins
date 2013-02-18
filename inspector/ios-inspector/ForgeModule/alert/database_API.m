@@ -80,6 +80,11 @@
     [task success: rowIds];
 }
 
+// Selecting multipel single notes by ID's and
++ (void)multiQuery:(ForgeTask *)task query:(NSString *)query {
+    
+}
+
 
 // Returns the JSON array of note objects that match the passed in query.
 + (void)query:(ForgeTask *)task query:(NSString *)query {

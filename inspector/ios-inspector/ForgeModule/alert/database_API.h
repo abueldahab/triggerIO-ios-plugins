@@ -21,6 +21,9 @@
 // Returns the JSON array of note objects that match the passed in query.
 + (void)query:(ForgeTask *)task query:(NSString *)query;
 
+// Returns an array of arrays 
++ (void)multiQuery:(ForgeTask *)task query:(NSString *)query;
+
 // Just drops all the tables in database, given an array of tables
 + (void)dropTables:(ForgeTask *)task tables:(NSArray *)tables;
 

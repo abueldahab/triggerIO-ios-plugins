@@ -32,7 +32,6 @@
 		"launchimage": {
 			"android": "img/launch/android_HRP.png", 
 			"android-landscape": "img/launch/android_HRL.png", 
-			"hide-manually": true, 
 			"ipad": "img/launch/iPad_P.png", 
 			"ipad-landscape": "img/launch/iPad_L.png", 
 			"ipad-landscape-retina": "img/launch/ipad_HRL.png", 
@@ -44,7 +43,7 @@
 		"notification": true, 
 		"package_names": {
 			"android": "com.fetchnotes.notes", 
-			"ios": "com.fetchnotes.Fetchnotes"
+			"ios": "com.fetchnotes.fetchnotes"
 		}, 
 		"prefs": true, 
 		"reload": true, 
@@ -63,17 +62,11 @@
 		"contextmenu": {
 			"hash": "9913ccde26fd85ff45273d9e19bf3c0cfc658ca1"
 		}, 
-		"database": {
-			"hash": "ce77baf7398c4ae22270497467b45712ee3cf187"
-		}, 
 		"events": {
 			"hash": "a55634bcab1e340c9114d04e55e6a96cfc8bed3e"
 		}, 
 		"keyboard": {
 			"hash": "7b57de34ab98c804f6c1ba9ae2b7b55570245cf6"
-		}, 
-		"kill_form_assist": {
-			"hash": "ea90c4c3668714a8cb20e7498eaa1be7692f97cb"
 		}
 	}, 
 	"version": "3.2"
