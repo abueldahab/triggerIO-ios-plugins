@@ -100,7 +100,9 @@
             [queryResultsArray addObject:[resultsSet resultDictionary]];
             NSLog(@"Adding query result to queryResultsArray %@", queryResultsArray);
         }
-        //clear queryResults for the next query
+        // add everything to the larger array
+        [multiQueryResultsArray addObject:queryResultsArray];
+        // clear queryResults for the next query
         [queryResultsArray removeAllObjects];
     }
     [database close];
