@@ -80,7 +80,7 @@
     [task success: rowIds];
 }
 
-// Selecting multipel single notes by ID's and
+// Selecting multipel single notes by ID's and places all the query results arrays into a larger array which it returns
 + (void)multiQuery:(ForgeTask *)task queries:(NSArray *)queries {
     
     // Locate Documents directory and open database.
@@ -90,18 +90,19 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    NSMutableArray *multiQueryArray = [NSMutableArray array];
     NSMutableArray *multiQueryResultsArray = [NSMutableArray array];
-    for (id query in queries){
+    NSMutableArray *queryResultsArray = [NSMutableArray array];
+    for (id query in queries) {
         FMResultSet *resultsSet = [database executeQuery:query];
         while ([resultsSet next]) {
-            [multiQueryResultsArray addObject:[resultsSet resultDictionary]];
+            [queryResultsArray addObject:[resultsSet resultDictionary]];
         }
-        [multiQueryResultsArray addObject:<#(id)#>]
+        [multiQueryResultsArray addObject: queryResultsArray];
     }
 
-    NSLog(@"Results array: %@", multiQueryResultsArray);
-
+//    NSLog(@"Results array: %@", multiQueryResultsArray);
+    
+    [task success:multiQueryResultsArray];
 }
 
 
