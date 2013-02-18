@@ -81,12 +81,7 @@
 }
 
 // Selecting multipel single notes by ID's and
-+ (void)multiQuery:(ForgeTask *)task query:(NSString *)query {
-    // Error handling.
-    if ([query length] == 0) {
-        [task error: @"Error: Query is 0 characters long"];
-        return;
-    }
++ (void)multiQuery:(ForgeTask *)task queries:(NSArray *)queries {
     
     // Locate Documents directory and open database.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -95,12 +90,18 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    NSMutableArray *resultsArray = [NSMutableArray array];
-    
-    NSLog(@"Results array: %@", resultsArray);
+    NSMutableArray *multiQueryArray = [NSMutableArray array];
+    NSMutableArray *multiQueryResultsArray = [NSMutableArray array];
+    for (id query in queries){
+        FMResultSet *resultsSet = [database executeQuery:query];
+        while ([resultsSet next]) {
+            [multiQueryResultsArray addObject:[resultsSet resultDictionary]];
+        }
+        [multiQueryResultsArray addObject:<#(id)#>]
+    }
 
-    
-    
+    NSLog(@"Results array: %@", multiQueryResultsArray);
+
 }
 
 
